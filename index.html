@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mi Entrenamiento</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#245C43">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root{
+    --bg:#F2F5F1;
+    --ink:#182420;
+    --ink-soft:#5A6B63;
+    --card:#FFFFFF;
+    --green:#245C43;
+    --green-deep:#16382A;
+    --lime:#C8E64A;
+    --lime-ink:#3A4A0E;
+    --line:#DDE5DE;
+    --danger:#B3402A;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);
+    padding-bottom:calc(84px + env(safe-area-inset-bottom));
+    font-size:16px;line-height:1.45;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:18px 16px 8px}
+
+  /* ---------- encabezado ---------- */
+  header{margin-bottom:14px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700}
+  h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-top:2px}
+  .fecha{color:var(--ink-soft);font-size:14px;margin-top:2px}
+
+  /* ---------- tarjetas ---------- */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .card h2{font-size:17px;font-weight:800;margin-bottom:4px;letter-spacing:-.01em}
+  .card .sub{font-size:13px;color:var(--ink-soft);margin-bottom:12px}
+  .card.dark{background:var(--green-deep);border-color:var(--green-deep);color:#EAF3EC}
+  .card.dark .sub{color:#A9C4B2}
+
+  /* ---------- botones ---------- */
+  .btn{display:block;width:100%;border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit}
+  .btn-primary{background:var(--lime);color:var(--lime-ink)}
+  .btn-primary:active{transform:scale(.985)}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+  .btn:disabled{opacity:.45}
+
+  /* ---------- selector de día ---------- */
+  .dias{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .dia-btn{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:10px 4px;text-align:center;cursor:pointer;font-family:inherit}
+  .dia-btn .d{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:700}
+  .dia-btn .n{font-size:12px;font-weight:700;margin-top:2px}
+  .dia-btn.activo{background:var(--green);border-color:var(--green);color:#fff}
+  .dia-btn.activo .d{color:#C9E0CF}
+
+  /* ---------- ejercicios ---------- */
+  .ej{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .ej:last-child{border-bottom:none}
+  .check{width:26px;height:26px;min-width:26px;border-radius:9px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;background:#fff;font-size:15px;color:transparent}
+  .ej.hecho .check{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
+  .ej-info{flex:1;min-width:0}
+  .ej-nombre{font-weight:700;font-size:15px}
+  .ej.hecho .ej-nombre{text-decoration:line-through;color:var(--ink-soft)}
+  .ej-detalle{font-size:12.5px;color:var(--ink-soft)}
+  /* ---------- cronómetro de descanso ---------- */
+  .timer-display{font-size:52px;font-weight:800;letter-spacing:-.02em;text-align:center;margin:6px 0 12px;font-variant-numeric:tabular-nums;color:var(--lime)}
+  .timer-display.listo{font-size:26px;color:#fff}
+  .timer-botones{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .t-btn{border:none;border-radius:12px;padding:12px 4px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--lime);color:var(--lime-ink)}
+  .t-btn:active{transform:scale(.97)}
+  .t-btn.t-stop{background:transparent;border:1.5px solid #3E6B54;color:#C9E0CF}
+
+  .progreso-sesion{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:12px 0}
+  .progreso-sesion>div{height:100%;background:var(--lime);border-radius:99px;transition:width .3s}
+
+  .aviso-ok{background:#E9F5E4;border:1px solid #BFDDB4;color:#2C5626;border-radius:12px;padding:12px;font-size:14px;font-weight:600;margin-bottom:12px;display:none}
+
+  /* ---------- comidas ---------- */
+  .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#E4EEE6;color:var(--green);border-radius:99px;padding:4px 10px;margin-bottom:8px}
+  .receta{padding:12px 0;border-bottom:1px solid var(--line)}
+  .receta:last-child{border-bottom:none}
+  .receta summary{font-weight:700;font-size:15px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .receta summary::after{content:"+";font-size:20px;color:var(--green);font-weight:400}
+  .receta[open] summary::after{content:"–"}
+  .receta .r-body{margin-top:8px;font-size:14px;color:var(--ink-soft)}
+  .receta .r-body strong{color:var(--ink)}
+  .receta ul{padding-left:18px;margin:6px 0}
+  .receta .paso{margin:4px 0}
+
+  /* ---------- peso ---------- */
+  .peso-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin-bottom:4px}
+  .peso-box .v{font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .peso-box .l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:700}
+  .card.dark .peso-box .l{color:#A9C4B2}
+  .delta-baja{color:var(--lime)}
+  .delta-sube{color:#F5B08A}
+  .fila-registro{display:flex;gap:8px;margin-top:12px}
+  .fila-registro input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:16px;font-family:inherit}
+  .fila-registro input:focus{outline:2px solid var(--green);border-color:var(--green)}
+  .fila-registro .btn{width:auto;padding:12px 18px}
+  .hist-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .hist-item:last-child{border-bottom:none}
+  .hist-item .fecha-h{color:var(--ink-soft);font-size:13px}
+  .x-btn{border:none;background:none;color:var(--danger);font-size:16px;cursor:pointer;padding:4px 8px;font-family:inherit}
+
+  /* ---------- gráfica ---------- */
+  .chart-wrap{margin-top:6px}
+  svg{display:block;width:100%;height:auto}
+
+  /* ---------- progreso ---------- */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 8px;text-align:center}
+  .stat .v{font-size:24px;font-weight:800;color:var(--green)}
+  .stat .l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:700;margin-top:2px}
+  .semana{display:flex;gap:6px;margin-top:8px}
+  .punto-dia{flex:1;text-align:center}
+  .punto-dia .b{width:100%;aspect-ratio:1;max-width:44px;margin:0 auto;border-radius:12px;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:15px}
+  .punto-dia.si .b{background:var(--lime)}
+  .punto-dia .t{font-size:10px;color:var(--ink-soft);margin-top:4px;font-weight:700}
+
+  .vacio{text-align:center;color:var(--ink-soft);font-size:14px;padding:18px 8px}
+
+  /* ---------- navegación inferior ---------- */
+  nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:50}
+  nav button{flex:1;border:none;background:none;padding:10px 0 8px;cursor:pointer;font-family:inherit;color:var(--ink-soft)}
+  nav button .ico{font-size:20px;display:block}
+  nav button .txt{font-size:10.5px;font-weight:700;letter-spacing:.02em}
+  nav button.activo{color:var(--green)}
+  nav button.activo .txt{color:var(--green)}
+
+  .pantalla{display:none}
+  .pantalla.activa{display:block;animation:fade .18s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.pantalla.activa{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Plan sin cardio · en casa</div>
+    <h1 id="titulo">Hoy toca entrenar</h1>
+    <div class="fecha" id="fechaHoy"></div>
+  </header>
+
+  <!-- ============ ENTRENAR ============ -->
+  <section class="pantalla activa" id="p-entrenar">
+    <div class="aviso-ok" id="avisoGuardado">✓ Sesión guardada. ¡Bien hecho!</div>
+    <div class="card dark">
+      <h2>Descanso entre series ⏱️</h2>
+      <div class="sub">Al terminar una serie, toca el tiempo. Cuando suene, ¡a la siguiente!</div>
+      <div class="timer-display listo" id="timerDisplay" aria-live="polite">Listo para entrenar</div>
+      <div class="timer-botones">
+        <button class="t-btn" data-seg="60">60 s</button>
+        <button class="t-btn" data-seg="90">90 s</button>
+        <button class="t-btn t-stop" id="btnTimerStop">Detener</button>
+      </div>
+    </div>
+    <div class="dias" id="selectorDias"></div>
+    <div class="card">
+      <h2 id="tituloDia"></h2>
+      <div class="sub" id="subDia"></div>
+      <div class="progreso-sesion"><div id="barraSesion" style="width:0%"></div></div>
+      <div id="listaEjercicios"></div>
+    </div>
+    <button class="btn btn-primary" id="btnGuardarSesion">Terminar y guardar sesión</button>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;text-align:center">Marca cada ejercicio al completar sus series y usa el cronómetro entre serie y serie.</p>
+    <div class="card" style="margin-top:12px">
+      <h2>🩺 Cuida tu espalda</h2>
+      <div style="font-size:13.5px;color:var(--ink-soft)">Este plan evita cargar la zona lumbar: no hay pesos muertos, remos inclinados sin apoyo ni giros de torso. Aun así, <strong style="color:var(--ink)">detente de inmediato</strong> si sientes dolor, hormigueo o adormecimiento en la espalda o las piernas, y muéstrale este plan a tu médico o fisioterapeuta antes de empezar para que lo apruebe o lo ajuste a tu cirugía.</div>
+    </div>
+  </section>
+
+  <!-- ============ COMIDAS ============ -->
+  <section class="pantalla" id="p-comidas">
+    <div class="card dark">
+      <h2>Comer barato y sin complicarse</h2>
+      <div class="sub">Recetas de 3 pasos o menos. La regla: proteína en cada comida + porciones moderadas. Con eso ya estás en camino.</div>
+    </div>
+    <div id="listaComidas"></div>
+    <div class="card">
+      <span class="tag">Lista de compras · para los dos 🛒</span>
+      <div style="font-size:14px;color:var(--ink-soft)">
+        <strong style="color:var(--ink)">Proteína y lácteos:</strong> huevos (para ti) · pechuga o muslos de pollo · jamón · atún en lata (4, solo para ti) · queso para gratinar y queso fresco · yogur natural grande · 2-3 yogures bebibles · leche.<br><br>
+        <strong style="color:var(--ink)">Despensa:</strong> avena · arroz · espagueti · sopa de fideo · lentejas · frijoles (de lata o bolsa) · harina para hot cakes · puré de jitomate (2-3) · pan integral de caja · bolillo o pan para molletes · tortillas de maíz y de harina · granola sin cacahuate ni nueces · mermelada · miel · aceite · sal · canela.<br><br>
+        <strong style="color:var(--ink)">Frutas y verduras:</strong> plátanos (varios) · manzanas · uvas o fresas · jitomate · cebolla · ajo · verdura congelada (2 bolsas) · 1 papa. Sin piña 🚫🍍<br><br>
+        ⚠️ <strong style="color:var(--ink)">En el súper:</strong> revisa que la granola, las galletas y cualquier producto empacado para tu hija NO diga "contiene o puede contener cacahuate/maní".
+      </div>
+      <div style="font-size:13px;color:var(--ink-soft);margin-top:10px;border-top:1px solid var(--line);padding-top:10px">
+        💡 <strong style="color:var(--ink)">Trucos de novato:</strong> la verdura congelada no se echa a perder y ya viene picada. Cocina arroz, lentejas y pollo desmenuzado una vez y te duran 3 días en el refri: son la base de varias comidas de ambos. El agua es la bebida por defecto para los dos.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMIDAS DE MI HIJA ============ -->
+  <section class="pantalla" id="p-hija">
+    <div class="card dark">
+      <h2>El menú de tu peque 👧</h2>
+      <div class="sub">Sin piña, sin mariscos, sin cacahuate y sin huevo directo (revuelto, cocido, estrellado). Sí puede comer preparaciones que llevan huevo en la mezcla, como hot cakes, pan o pasta.<br><br>⚠️ Por sus alergias, revisa siempre las etiquetas: evita todo lo que diga <strong style="color:#fff">"contiene o puede contener cacahuate / maní"</strong>. Ante cualquier duda con un alimento nuevo, mejor consúltalo con su pediatra.</div>
+    </div>
+    <div id="listaHija"></div>
+  </section>
+
+  <!-- ============ PESO ============ -->
+  <section class="pantalla" id="p-peso">
+    <div class="card dark">
+      <div class="peso-grid">
+        <div class="peso-box"><div class="v" id="pesoInicial">—</div><div class="l">Inicial</div></div>
+        <div class="peso-box"><div class="v" id="pesoActual">—</div><div class="l">Actual</div></div>
+        <div class="peso-box"><div class="v" id="pesoDelta">—</div><div class="l">Cambio</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Registrar peso</h2>
+      <div class="sub">Pésate 1 vez por semana, el mismo día, en ayunas. El peso diario sube y baja solo: no te asustes por un mal día.</div>
+      <div class="fila-registro">
+        <input type="number" inputmode="decimal" step="0.1" min="20" max="400" id="inputPeso" placeholder="Ej. 82.5">
+        <button class="btn btn-primary" id="btnPeso">Guardar</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Evolución</h2>
+      <div class="chart-wrap" id="chartPeso"><div class="vacio">Registra tu primer peso para ver la gráfica 📉</div></div>
+    </div>
+    <div class="card">
+      <h2>Historial</h2>
+      <div id="histPeso"><div class="vacio">Aún no hay registros.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ PROGRESO ============ -->
+  <section class="pantalla" id="p-progreso">
+    <div class="stats">
+      <div class="stat"><div class="v" id="statTotal">0</div><div class="l">Sesiones</div></div>
+      <div class="stat"><div class="v" id="statSemana">0/4</div><div class="l">Esta semana</div></div>
+      <div class="stat"><div class="v" id="statRacha">0</div><div class="l">Semanas seguidas</div></div>
+    </div>
+    <div class="card">
+      <h2>Tu semana</h2>
+      <div class="sub">Meta: 4 sesiones (mar, jue, sáb y dom)</div>
+      <div class="semana" id="semanaVista"></div>
+    </div>
+    <div class="card">
+      <h2>Últimas sesiones</h2>
+      <div id="histSesiones"><div class="vacio">Cuando termines tu primera sesión aparecerá aquí. ¡Tú puedes! 💪</div></div>
+    </div>
+  </section>
+</div>
+
+<nav>
+  <button data-p="p-entrenar" class="activo"><span class="ico">🏋️</span><span class="txt">Entrenar</span></button>
+  <button data-p="p-comidas"><span class="ico">🍳</span><span class="txt">Comidas</span></button>
+  <button data-p="p-hija"><span class="ico">👧</span><span class="txt">Mi hija</span></button>
+  <button data-p="p-peso"><span class="ico">⚖️</span><span class="txt">Peso</span></button>
+  <button data-p="p-progreso"><span class="ico">📈</span><span class="txt">Progreso</span></button>
+</nav>
+
+<script>
+/* ================= DATOS DEL PLAN ================= */
+const PLAN = {
+  martes: { nombre:"Martes · Tren inferior", sub:"Piernas y glúteos, espalda siempre recta. Calienta 5 min antes.", ejercicios:[
+    {id:"m1", n:"Sentadilla a la silla", d:"3 × 12 · baja hasta rozar la silla, sin redondear la espalda"},
+    {id:"m2", n:"Zancada estática con apoyo", d:"3 × 10 por pierna · una mano en el respaldo, torso vertical"},
+    {id:"m3", n:"Hip thrust en el sofá", d:"3 × 15 · aprieta glúteos arriba, sin arquear la espalda baja"},
+    {id:"m4", n:"Elevación de talones", d:"3 × 20 · de pie, junto a la pared"},
+    {id:"m5", n:"Bird dog", d:"3 × 8 por lado · brazo y pierna contraria, lento y controlado"}
+  ]},
+  jueves: { nombre:"Jueves · Tren superior + core", sub:"Pecho, espalda alta y abdomen, sin cargar la zona lumbar.", ejercicios:[
+    {id:"j1", n:"Flexiones inclinadas", d:"3 × 8-12 · manos en mesa o sofá, cuerpo en línea recta"},
+    {id:"j2", n:"Remo con apoyo en silla", d:"3 × 12 por brazo · mano y rodilla apoyadas, espalda plana"},
+    {id:"j3", n:"Press de hombros sentado", d:"3 × 10 · en silla con respaldo, espalda pegada al respaldo"},
+    {id:"j4", n:"Curl de bíceps", d:"3 × 12 · de pie junto a la pared, sin balancearte"},
+    {id:"j5", n:"Plancha", d:"3 × 20-40 seg · en rodillas si sientes molestia"}
+  ]},
+  sabado: { nombre:"Sábado · Cuerpo completo", sub:"La sesión más completa, con la espalda siempre apoyada o neutra.", ejercicios:[
+    {id:"s1", n:"Sentadilla goblet a la silla", d:"3 × 10 · mancuerna al pecho, baja hasta rozar la silla"},
+    {id:"s2", n:"Step-up en escalón bajo", d:"3 × 10 por pierna · escalón bajo, torso erguido"},
+    {id:"s3", n:"Press de pecho en el suelo", d:"3 × 12 · acostado, rodillas dobladas"},
+    {id:"s4", n:"Remo a un brazo con apoyo", d:"3 × 12 por brazo · siempre apoyado en la silla"},
+    {id:"s5", n:"Dead bug", d:"3 × 10 por lado · espalda baja pegada al suelo todo el tiempo"}
+  ]},
+  domingo: { nombre:"Domingo · Core + brazos", sub:"Sesión ligera y segura para cerrar la semana.", ejercicios:[
+    {id:"d1", n:"Puente de glúteos", d:"3 × 15 · sube solo hasta que el cuerpo quede en línea"},
+    {id:"d2", n:"Plancha lateral", d:"2 × 15-30 seg por lado · en rodillas si hace falta"},
+    {id:"d3", n:"Extensión de tríceps sentado", d:"3 × 12 · en silla con respaldo, a dos manos"},
+    {id:"d4", n:"Curl martillo", d:"3 × 12 · palmas enfrentadas"},
+    {id:"d5", n:"Encogimiento de hombros", d:"3 × 15 · sube los hombros hacia las orejas, baja lento"}
+  ]}
+};
+const ORDEN_DIAS = ["martes","jueves","sabado","domingo"];
+const ETIQUETAS = {martes:"Mar", jueves:"Jue", sabado:"Sáb", domingo:"Dom"};
+const ICONO_DIA = {martes:"🦵", jueves:"💪", sabado:"🔥", domingo:"🧘"};
+
+const COMIDAS = [
+  { tipo:"Desayunos", items:[
+    { n:"Avena con plátano 🍌", ing:"½ taza de avena, 1 taza de leche o agua, 1 plátano, canela",
+      pasos:["Hierve la avena con la leche 5 min, moviendo de vez en cuando.","Sirve con el plátano en rodajas y canela encima."]},
+    { n:"Huevos revueltos con tortilla 🍳", ing:"2-3 huevos, 2 tortillas o 2 rebanadas de pan, jitomate y cebolla picados",
+      pasos:["Sofríe jitomate y cebolla 2 min en un sartén con poquito aceite.","Agrega los huevos batidos y revuelve hasta que cuajen.","Sirve con las tortillas o el pan."]},
+    { n:"Yogur con fruta y avena 🥣", ing:"1 taza de yogur natural, 1 fruta picada, 2 cucharadas de avena",
+      pasos:["Mezcla todo en un tazón. Listo, no se cocina nada."]}
+  ]},
+  { tipo:"Comidas", items:[
+    { n:"Pollo con arroz y verdura 🍗", ing:"1 pechuga o 2 muslos, ½ taza de arroz, verdura congelada, sal y ajo",
+      pasos:["Cuece el arroz (1 medida de arroz por 2 de agua, 15 min a fuego bajo).","Salpimienta el pollo y dóralo en el sartén 6-7 min por lado.","Calienta la verdura congelada 5 min en el mismo sartén."]},
+    { n:"Pasta con atún 🍝", ing:"100 g de pasta, 1 lata de atún, jitomate picado, ajo, aceite",
+      pasos:["Hierve la pasta según el paquete y escúrrela.","Sofríe ajo y jitomate 3 min, agrega el atún escurrido.","Mezcla todo y listo."]},
+    { n:"Lentejas guisadas 🍲", ing:"1 taza de lentejas, jitomate, cebolla, ajo, 1 papa (opcional), sal",
+      pasos:["Sofríe cebolla, ajo y jitomate en la olla.","Agrega lentejas y 4 tazas de agua. Hierve 25-30 min hasta que estén suaves.","Rinde para 2-3 días. Guarda en el refri."]}
+  ]},
+  { tipo:"Cenas (ligeras)", items:[
+    { n:"Quesadillas con frijoles 🌮", ing:"2 tortillas, queso fresco, frijoles",
+      pasos:["Calienta las tortillas con queso en un sartén hasta que gratine.","Acompaña con frijoles calientes."]},
+    { n:"Ensalada de atún 🥗", ing:"1 lata de atún, jitomate, lechuga o pepino, limón, sal",
+      pasos:["Pica todo, mezcla con el atún escurrido y aliña con limón y sal."]},
+    { n:"Sándwich de huevo 🥪", ing:"2 rebanadas de pan integral, 1-2 huevos, jitomate",
+      pasos:["Haz el huevo estrellado o revuelto.","Arma el sándwich con el jitomate en rodajas."]}
+  ]}
+];
+
+/* ================= ALMACENAMIENTO ================= */
+const KEY = "entrena-app-datos";
+let memoria = null;
+let modoMemoria = false;
+
+async function cargar(){
+  if (window.storage) {
+    try { const r = await window.storage.get(KEY); if (r && r.value) return JSON.parse(r.value); } catch(e){}
+  }
+  try { const v = localStorage.getItem(KEY); if (v) return JSON.parse(v); } catch(e){ modoMemoria = true; }
+  return null;
+}
+async function guardar(){
+  const s = JSON.stringify(estado);
+  if (window.storage) {
+    try { await window.storage.set(KEY, s); return; } catch(e){}
+  }
+  try { localStorage.setItem(KEY, s); } catch(e){ memoria = s; modoMemoria = true; }
+}
+
+/* ================= ESTADO ================= */
+let estado = { pesos: [], sesiones: [] };
+let diaActivo = ORDEN_DIAS[0];
+let sesionActual = {}; // {idEjercicio:{done:bool,kg:string}}
+
+function hoyISO(){ const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function fmtFecha(iso){
+  const [y,m,d] = iso.split("-").map(Number);
+  const dt = new Date(y, m-1, d);
+  return dt.toLocaleDateString("es-MX",{weekday:"short", day:"numeric", month:"short"});
+}
+function diaSugerido(){
+  const dow = new Date().getDay(); // 0=dom
+  if (dow === 2) return "martes";
+  if (dow === 4) return "jueves";
+  if (dow === 6) return "sabado";
+  if (dow === 0) return "domingo";
+  // día de descanso: sugiere el próximo
+  if (dow === 1) return "martes";
+  if (dow === 3) return "jueves";
+  return "sabado"; // viernes
+}
+
+/* ================= PANTALLA: ENTRENAR ================= */
+function pintarSelectorDias(){
+  const cont = document.getElementById("selectorDias");
+  cont.innerHTML = "";
+  ORDEN_DIAS.forEach(k=>{
+    const b = document.createElement("button");
+    b.className = "dia-btn" + (k===diaActivo ? " activo":"");
+    b.innerHTML = '<div class="d">'+ETIQUETAS[k]+'</div><div class="n">'+ICONO_DIA[k]+'</div>';
+    b.onclick = ()=>{ diaActivo = k; sesionActual = {}; pintarSelectorDias(); pintarEjercicios(); };
+    cont.appendChild(b);
+  });
+}
+function pintarEjercicios(){
+  const plan = PLAN[diaActivo];
+  document.getElementById("tituloDia").textContent = plan.nombre;
+  document.getElementById("subDia").textContent = plan.sub;
+  const cont = document.getElementById("listaEjercicios");
+  cont.innerHTML = "";
+  plan.ejercicios.forEach(ej=>{
+    const est = sesionActual[ej.id] || {done:false};
+    const fila = document.createElement("div");
+    fila.className = "ej" + (est.done ? " hecho":"");
+    fila.innerHTML =
+      '<div class="check" role="checkbox" aria-checked="'+est.done+'" tabindex="0">✓</div>'+
+      '<div class="ej-info"><div class="ej-nombre">'+ej.n+'</div><div class="ej-detalle">'+ej.d+'</div></div>';
+    const chk = fila.querySelector(".check");
+    const marcar = ()=>{
+      const s = sesionActual[ej.id] || {done:false};
+      s.done = !s.done;
+      sesionActual[ej.id] = s;
+      pintarEjercicios();
+    };
+    chk.onclick = marcar;
+    chk.onkeydown = (e)=>{ if(e.key===" "||e.key==="Enter"){ e.preventDefault(); marcar(); } };
+    cont.appendChild(fila);
+  });
+  actualizarBarra();
+}
+function actualizarBarra(){
+  const total = PLAN[diaActivo].ejercicios.length;
+  const hechos = PLAN[diaActivo].ejercicios.filter(e=> sesionActual[e.id] && sesionActual[e.id].done).length;
+  document.getElementById("barraSesion").style.width = Math.round(hechos/total*100)+"%";
+  document.getElementById("btnGuardarSesion").disabled = hechos === 0;
+}
+document.getElementById("btnGuardarSesion").onclick = async ()=>{
+  const hechos = PLAN[diaActivo].ejercicios.filter(e=> sesionActual[e.id] && sesionActual[e.id].done).length;
+  if (hechos === 0) return;
+  estado.sesiones.push({ fecha: hoyISO(), dia: diaActivo, hechos, total: PLAN[diaActivo].ejercicios.length, ejercicios: JSON.parse(JSON.stringify(sesionActual)) });
+  sesionActual = {};
+  await guardar();
+  pintarEjercicios();
+  pintarProgreso();
+  const av = document.getElementById("avisoGuardado");
+  av.style.display = "block";
+  setTimeout(()=>{ av.style.display = "none"; }, 3500);
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+
+/* ================= PANTALLA: COMIDAS ================= */
+function pintarComidas(){
+  const cont = document.getElementById("listaComidas");
+  cont.innerHTML = "";
+  COMIDAS.forEach(grupo=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    let html = '<span class="tag">'+grupo.tipo+'</span>';
+    grupo.items.forEach(r=>{
+      html += '<details class="receta"><summary>'+r.n+'</summary><div class="r-body">'+
+        '<strong>Necesitas:</strong> '+r.ing+'<ul>'+
+        r.pasos.map(p=>'<li class="paso">'+p+'</li>').join("")+
+        '</ul></div></details>';
+    });
+    card.innerHTML = html;
+    cont.appendChild(card);
+  });
+}
+
+/* ================= PANTALLA: COMIDAS DE MI HIJA ================= */
+const MENU_HIJA = [
+  { dia:"Martes", comidas:[
+    { t:"Cena", n:"Quesadillas con frijoles 🌮", juntos:true,
+      d:"Tortillas con queso al sartén hasta gratinar, con frijoles calientes. Es la misma cena que la tuya: cocinas una sola vez." }
+  ]},
+  { dia:"Miércoles", comidas:[
+    { t:"Desayuno", n:"Hot cakes con plátano 🥞",
+      d:"Harina preparada (solo agregas leche), 3 hot cakes chicos con plátano en rodajas y un vaso de leche. El huevo va dentro de la mezcla, así que sí puede comerlos." },
+    { t:"Lunch escolar", n:"Sándwich de jamón y queso 🥪",
+      d:"Pan integral con jamón y queso + manzana en gajos o uvas + agua natural. Se arma en 5 minutos en la mañana." }
+  ]},
+  { dia:"Jueves", comidas:[
+    { t:"Cena", n:"Espagueti rojo con pollo 🍝", juntos:true,
+      d:"Pasta con puré de jitomate y pollo desmenuzado con queso rallado. Cuece pasta de más: la misma te sirve para tu pasta con atún (el atún va solo en tu plato)." }
+  ]},
+  { dia:"Viernes", comidas:[
+    { t:"Desayuno", n:"Avena con plátano 🍌", juntos:true,
+      d:"La misma avena que la tuya; a la de ella agrégale una cucharadita de miel o mermelada." },
+    { t:"Lunch escolar", n:"Wrap de pollo con queso 🌯",
+      d:"Tortilla de harina + pollo desmenuzado (sobró del jueves) + queso, bien enrollado y cortado en ruedas. Acompaña con fruta picada y un yogur bebible." },
+    { t:"Cena", n:"Molletes 🍞", juntos:true,
+      d:"Pan partido a la mitad con frijoles y queso, al sartén tapado hasta gratinar. Hazte unos para ti también: misma cena para los dos." }
+  ]},
+  { dia:"Sábado", comidas:[
+    { t:"Desayuno", n:"Yogur con fruta y granola 🥣", juntos:true,
+      d:"Yogur natural con plátano o fresas y granola. ⚠️ Elige granola sin cacahuate ni frutos secos: revisa la etiqueta." },
+    { t:"Comida", n:"Pollo con arroz y verdura 🍗", juntos:true,
+      d:"La misma comida que la tuya, en porción chica. Si se resiste a la verdura, dale más arroz y una o dos piezas de verdura para probar, sin pelear." },
+    { t:"Cena", n:"Sopa de fideo con queso 🍜",
+      d:"Fideo dorado ligeramente, puré de jitomate y agua, 10 minutos a fuego medio. Queso rallado encima. A casi todos los niños les encanta." }
+  ]},
+  { dia:"Domingo", comidas:[
+    { t:"Desayuno", n:"Licuado de plátano con avena 🥤",
+      d:"Leche + 1 plátano + 2 cucharadas de avena a la licuadora. Con pan tostado con mermelada o mantequilla (de leche, nunca de cacahuate)." },
+    { t:"Comida", n:"Lentejas con arroz 🍲", juntos:true,
+      d:"Las mismas lentejas que las tuyas, servidas con arroz. Si no le encantan, licúalas como crema y sírvela con queso espolvoreado: cambia todo." }
+  ]}
+];
+function pintarHija(){
+  const cont = document.getElementById("listaHija");
+  cont.innerHTML = "";
+  MENU_HIJA.forEach(g=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    let html = '<span class="tag">'+g.dia+'</span>';
+    g.comidas.forEach(c=>{
+      html += '<div class="receta" style="padding:12px 0">'+
+        '<div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)">'+c.t+
+        (c.juntos ? ' · <span style="color:var(--green)">comen lo mismo 👨‍👧</span>' : '')+'</div>'+
+        '<div style="font-weight:700;font-size:15px;margin:2px 0 4px">'+c.n+'</div>'+
+        '<div style="font-size:13.5px;color:var(--ink-soft)">'+c.d+'</div>'+
+      '</div>';
+    });
+    card.innerHTML = html;
+    cont.appendChild(card);
+  });
+}
+
+/* ================= PANTALLA: PESO ================= */
+document.getElementById("btnPeso").onclick = async ()=>{
+  const inp = document.getElementById("inputPeso");
+  const v = parseFloat(inp.value);
+  if (!v || v < 20 || v > 400) { inp.focus(); return; }
+  estado.pesos.push({ fecha: hoyISO(), kg: Math.round(v*10)/10 });
+  inp.value = "";
+  await guardar();
+  pintarPeso();
+};
+async function borrarPeso(i){
+  estado.pesos.splice(i,1);
+  await guardar();
+  pintarPeso();
+}
+function pintarPeso(){
+  const ps = estado.pesos;
+  const elI = document.getElementById("pesoInicial");
+  const elA = document.getElementById("pesoActual");
+  const elD = document.getElementById("pesoDelta");
+  if (ps.length === 0){ elI.textContent = elA.textContent = elD.textContent = "—"; }
+  else {
+    const ini = ps[0].kg, act = ps[ps.length-1].kg;
+    const d = Math.round((act-ini)*10)/10;
+    elI.textContent = ini + " kg";
+    elA.textContent = act + " kg";
+    elD.textContent = (d>0?"+":"") + d + " kg";
+    elD.className = "v " + (d < 0 ? "delta-baja" : d > 0 ? "delta-sube" : "");
+  }
+  // historial
+  const h = document.getElementById("histPeso");
+  if (ps.length === 0) h.innerHTML = '<div class="vacio">Aún no hay registros.</div>';
+  else {
+    h.innerHTML = "";
+    for (let i = ps.length-1; i >= 0; i--){
+      const fila = document.createElement("div");
+      fila.className = "hist-item";
+      fila.innerHTML = '<span class="fecha-h">'+fmtFecha(ps[i].fecha)+'</span><span style="font-weight:700">'+ps[i].kg+' kg</span>';
+      const x = document.createElement("button");
+      x.className = "x-btn"; x.textContent = "✕"; x.setAttribute("aria-label","Borrar registro");
+      x.onclick = ()=> borrarPeso(i);
+      fila.appendChild(x);
+      h.appendChild(fila);
+    }
+  }
+  pintarGrafica();
+}
+function pintarGrafica(){
+  const cont = document.getElementById("chartPeso");
+  const ps = estado.pesos;
+  if (ps.length < 2){
+    cont.innerHTML = '<div class="vacio">'+(ps.length===0 ? "Registra tu primer peso para ver la gráfica 📉" : "Con tu segundo registro aparecerá la línea de tendencia.")+'</div>';
+    return;
+  }
+  const W = 320, H = 160, pad = 26;
+  const vals = ps.map(p=>p.kg);
+  let min = Math.min(...vals), max = Math.max(...vals);
+  if (max - min < 2){ const c = (max+min)/2; min = c-1; max = c+1; }
+  const x = i => pad + (W - pad*2) * (ps.length === 1 ? 0 : i/(ps.length-1));
+  const y = v => (H - pad) - (H - pad*2) * ((v - min)/(max - min));
+  let pts = ps.map((p,i)=> x(i).toFixed(1)+","+y(p.kg).toFixed(1)).join(" ");
+  let dots = ps.map((p,i)=>'<circle cx="'+x(i).toFixed(1)+'" cy="'+y(p.kg).toFixed(1)+'" r="3.5" fill="#245C43"/>').join("");
+  const primero = ps[0], ultimo = ps[ps.length-1];
+  cont.innerHTML =
+    '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Gráfica de evolución del peso">'+
+    '<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="#DDE5DE" stroke-width="1"/>'+
+    '<text x="'+pad+'" y="12" font-size="10" fill="#5A6B63">'+max.toFixed(1)+' kg</text>'+
+    '<text x="'+pad+'" y="'+(H-pad+14)+'" font-size="10" fill="#5A6B63">'+fmtFecha(primero.fecha)+'</text>'+
+    '<text x="'+(W-pad)+'" y="'+(H-pad+14)+'" font-size="10" fill="#5A6B63" text-anchor="end">'+fmtFecha(ultimo.fecha)+'</text>'+
+    '<polyline points="'+pts+'" fill="none" stroke="#245C43" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'+
+    dots +
+    '</svg>';
+}
+
+/* ================= PANTALLA: PROGRESO ================= */
+function inicioSemana(d){ // lunes como inicio
+  const dt = new Date(d); const dow = (dt.getDay()+6)%7;
+  dt.setDate(dt.getDate()-dow); dt.setHours(0,0,0,0);
+  return dt;
+}
+function pintarProgreso(){
+  const ses = estado.sesiones;
+  document.getElementById("statTotal").textContent = ses.length;
+
+  const lunes = inicioSemana(new Date());
+  const enSemana = ses.filter(s=>{
+    const [y,m,d] = s.fecha.split("-").map(Number);
+    return new Date(y,m-1,d) >= lunes;
+  });
+  document.getElementById("statSemana").textContent = Math.min(enSemana.length,9) + "/4";
+
+  // racha: semanas consecutivas (hacia atrás) con al menos 1 sesión
+  const semanasCon = new Set(ses.map(s=>{
+    const [y,m,d] = s.fecha.split("-").map(Number);
+    return inicioSemana(new Date(y,m-1,d)).getTime();
+  }));
+  let racha = 0; let cursor = lunes.getTime();
+  while (semanasCon.has(cursor)){ racha++; cursor -= 7*24*3600*1000; }
+  document.getElementById("statRacha").textContent = racha;
+
+  // vista de semana
+  const cont = document.getElementById("semanaVista");
+  cont.innerHTML = "";
+  const hechosDias = new Set(enSemana.map(s=>s.dia));
+  ORDEN_DIAS.forEach(k=>{
+    const div = document.createElement("div");
+    div.className = "punto-dia" + (hechosDias.has(k) ? " si":"");
+    div.innerHTML = '<div class="b">'+(hechosDias.has(k) ? "✓" : ICONO_DIA[k])+'</div><div class="t">'+ETIQUETAS[k].toUpperCase()+'</div>';
+    cont.appendChild(div);
+  });
+
+  // historial de sesiones
+  const h = document.getElementById("histSesiones");
+  if (ses.length === 0){ h.innerHTML = '<div class="vacio">Cuando termines tu primera sesión aparecerá aquí. ¡Tú puedes! 💪</div>'; return; }
+  h.innerHTML = "";
+  const ultimas = ses.slice(-10).reverse();
+  ultimas.forEach(s=>{
+    const fila = document.createElement("div");
+    fila.className = "hist-item";
+    fila.innerHTML = '<span>'+ICONO_DIA[s.dia]+' <strong>'+PLAN[s.dia].nombre.split("·")[1].trim()+'</strong><br><span class="fecha-h">'+fmtFecha(s.fecha)+'</span></span>'+
+      '<span style="font-weight:700;color:var(--green)">'+s.hechos+'/'+s.total+' ✓</span>';
+    h.appendChild(fila);
+  });
+}
+
+/* ================= CRONÓMETRO DE DESCANSO ================= */
+let timerInt = null, timerFin = 0, audioCtx = null;
+const timerDisplay = document.getElementById("timerDisplay");
+
+function sonarAlarma(){
+  try{
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const t0 = audioCtx.currentTime + 0.02;
+    [0, 0.28, 0.56].forEach((off, i)=>{
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = "sine";
+      o.frequency.value = i === 2 ? 1318 : 880; // dos tonos y uno más agudo al final
+      g.gain.setValueAtTime(0.0001, t0 + off);
+      g.gain.exponentialRampToValueAtTime(0.5, t0 + off + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + off + 0.24);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t0 + off); o.stop(t0 + off + 0.26);
+    });
+  }catch(e){}
+  if (navigator.vibrate) navigator.vibrate([250, 120, 250, 120, 400]);
+}
+function fmtTimer(ms){
+  const s = Math.max(0, Math.ceil(ms/1000));
+  return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0");
+}
+function iniciarTimer(seg){
+  clearInterval(timerInt);
+  // crear el contexto de audio con el toque del usuario para que el sonido funcione en el celular
+  try{
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+  }catch(e){}
+  timerFin = Date.now() + seg*1000;
+  timerDisplay.classList.remove("listo");
+  timerDisplay.textContent = fmtTimer(seg*1000);
+  timerInt = setInterval(()=>{
+    const resta = timerFin - Date.now();
+    if (resta <= 0){
+      clearInterval(timerInt); timerInt = null;
+      timerDisplay.classList.add("listo");
+      timerDisplay.textContent = "¡Siguiente serie! 💥";
+      sonarAlarma();
+      return;
+    }
+    timerDisplay.textContent = fmtTimer(resta);
+  }, 200);
+}
+document.querySelectorAll(".t-btn[data-seg]").forEach(b=>{
+  b.onclick = ()=> iniciarTimer(parseInt(b.dataset.seg, 10));
+});
+document.getElementById("btnTimerStop").onclick = ()=>{
+  clearInterval(timerInt); timerInt = null;
+  timerDisplay.classList.add("listo");
+  timerDisplay.textContent = "Listo para entrenar";
+};
+
+/* ================= NAVEGACIÓN ================= */
+const TITULOS = {"p-entrenar":"Hoy toca entrenar","p-comidas":"Comer rico y fácil","p-hija":"El menú de tu peque","p-peso":"Tu peso","p-progreso":"Tu progreso"};
+document.querySelectorAll("nav button").forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll("nav button").forEach(x=>x.classList.remove("activo"));
+    b.classList.add("activo");
+    document.querySelectorAll(".pantalla").forEach(p=>p.classList.remove("activa"));
+    document.getElementById(b.dataset.p).classList.add("activa");
+    document.getElementById("titulo").textContent = TITULOS[b.dataset.p];
+    window.scrollTo({top:0});
+  };
+});
+
+/* ================= INICIO ================= */
+(async function init(){
+  const d = new Date();
+  document.getElementById("fechaHoy").textContent = d.toLocaleDateString("es-MX",{weekday:"long", day:"numeric", month:"long"});
+  const cargado = await cargar();
+  if (cargado){ estado = Object.assign({pesos:[],sesiones:[]}, cargado); }
+  diaActivo = diaSugerido();
+  pintarSelectorDias();
+  pintarEjercicios();
+  pintarComidas();
+  pintarHija();
+  pintarPeso();
+  pintarProgreso();
+  if (modoMemoria){
+    const av = document.getElementById("avisoGuardado");
+    av.textContent = "⚠️ Tu navegador no permite guardar datos: el progreso se perderá al cerrar.";
+    av.style.display = "block";
+  }
+})();
+
+/* ================= PWA: registro del service worker ================= */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
