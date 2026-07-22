@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mi Entrenamiento</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#245C43">
-<link rel="apple-touch-icon" href="icon-180.png">
 <style>
   :root{
     --bg:#F2F5F1;
@@ -265,7 +262,7 @@
 const PLAN = {
   martes: { nombre:"Martes · Tren inferior", sub:"Piernas y glúteos, espalda siempre recta. Calienta 5 min antes.", ejercicios:[
     {id:"m1", n:"Sentadilla a la silla", d:"3 × 12 · baja hasta rozar la silla, sin redondear la espalda"},
-    {id:"m2", n:"Zancada estática con apoyo", d:"3 × 10 por pierna · una mano en el respaldo, torso vertical"},
+    {id:"m2", n:"Abducción de cadera acostado", d:"3 × 15 por lado · de lado, eleva la pierna recta, baja lento"},
     {id:"m3", n:"Hip thrust en el sofá", d:"3 × 15 · aprieta glúteos arriba, sin arquear la espalda baja"},
     {id:"m4", n:"Elevación de talones", d:"3 × 20 · de pie, junto a la pared"},
     {id:"m5", n:"Bird dog", d:"3 × 8 por lado · brazo y pierna contraria, lento y controlado"}
@@ -447,39 +444,87 @@ function pintarComidas(){
 const MENU_HIJA = [
   { dia:"Martes", comidas:[
     { t:"Cena", n:"Quesadillas con frijoles 🌮", juntos:true,
-      d:"Tortillas con queso al sartén hasta gratinar, con frijoles calientes. Es la misma cena que la tuya: cocinas una sola vez." }
+      d:"Tortillas con queso al sartén hasta gratinar, con frijoles calientes. Es la misma cena que la tuya: cocinas una sola vez.",
+      alt:[
+        { n:"Sincronizadas de jamón y queso", d:"Dos tortillas de harina con jamón y queso en medio, al sartén por ambos lados hasta gratinar. Corta en triángulos." },
+        { n:"Sopa de letras con queso", d:"Pasta de letras con puré de jitomate y agua, 10 min. Queso rallado encima." }
+      ]}
   ]},
   { dia:"Miércoles", comidas:[
     { t:"Desayuno", n:"Hot cakes con plátano 🥞",
-      d:"Harina preparada (solo agregas leche), 3 hot cakes chicos con plátano en rodajas y un vaso de leche. El huevo va dentro de la mezcla, así que sí puede comerlos." },
+      d:"Harina preparada (solo agregas leche), 3 hot cakes chicos con plátano en rodajas y un vaso de leche. El huevo va dentro de la mezcla, así que sí puede comerlos.",
+      alt:[
+        { n:"Quesadilla con licuado de plátano", d:"Una quesadilla al comal + licuado de leche con plátano. Desayuno en 10 minutos." },
+        { n:"Yogur con fruta y granola", d:"Yogur natural, fruta picada y granola sin cacahuate. No se cocina nada." }
+      ]},
     { t:"Lunch escolar", n:"Sándwich de jamón y queso 🥪",
-      d:"Pan integral con jamón y queso + manzana en gajos o uvas + agua natural. Se arma en 5 minutos en la mañana." }
+      d:"Pan integral con jamón y queso + manzana en gajos o uvas + agua natural. Se arma en 5 minutos en la mañana.",
+      alt:[
+        { n:"Mini quesadillas frías", d:"2-3 quesadillas chicas hechas en la mañana + palomitas naturales + uvas." },
+        { n:"Wrap de jamón y queso", d:"Tortilla de harina enrollada con jamón y queso, cortada en ruedas, + fruta picada." }
+      ]}
   ]},
   { dia:"Jueves", comidas:[
     { t:"Cena", n:"Espagueti rojo con pollo 🍝", juntos:true,
-      d:"Pasta con puré de jitomate y pollo desmenuzado con queso rallado. Cuece pasta de más: la misma te sirve para tu pasta con atún (el atún va solo en tu plato)." }
+      d:"Pasta con puré de jitomate y pollo desmenuzado con queso rallado. Cuece pasta de más: la misma te sirve para tu pasta con atún (el atún va solo en tu plato).",
+      alt:[
+        { n:"Molletes", d:"Pan con frijoles y queso gratinado al sartén tapado." },
+        { n:"Tacos de frijol con queso", d:"Tortillas calientes con frijoles y queso, enrolladas. 5 minutos." }
+      ]}
   ]},
   { dia:"Viernes", comidas:[
     { t:"Desayuno", n:"Avena con plátano 🍌", juntos:true,
-      d:"La misma avena que la tuya; a la de ella agrégale una cucharadita de miel o mermelada." },
+      d:"La misma avena que la tuya; a la de ella agrégale una cucharadita de miel o mermelada.",
+      alt:[
+        { n:"Licuado de fresa con pan tostado", d:"Leche + fresas a la licuadora, con pan tostado con mermelada." },
+        { n:"Hot cakes con mermelada", d:"Los mismos de la harina preparada, cambia el plátano por mermelada." }
+      ]},
     { t:"Lunch escolar", n:"Wrap de pollo con queso 🌯",
-      d:"Tortilla de harina + pollo desmenuzado (sobró del jueves) + queso, bien enrollado y cortado en ruedas. Acompaña con fruta picada y un yogur bebible." },
+      d:"Tortilla de harina + pollo desmenuzado (sobró del jueves) + queso, bien enrollado y cortado en ruedas. Acompaña con fruta picada y un yogur bebible.",
+      alt:[
+        { n:"Pasta fría con jamón y queso", d:"Espagueti o coditos que sobraron, con jamón y queso en cubitos. Va bien frío en el lonchera." },
+        { n:"Sándwich de queso con jitomate", d:"Pan integral, queso y jitomate en rodajas + yogur bebible + fruta." }
+      ]},
     { t:"Cena", n:"Molletes 🍞", juntos:true,
-      d:"Pan partido a la mitad con frijoles y queso, al sartén tapado hasta gratinar. Hazte unos para ti también: misma cena para los dos." }
+      d:"Pan partido a la mitad con frijoles y queso, al sartén tapado hasta gratinar. Hazte unos para ti también: misma cena para los dos.",
+      alt:[
+        { n:"Sándwich caliente de queso", d:"Al sartén con poquita mantequilla hasta que dore y el queso se derrita. Con jitomate en rodajas al lado." },
+        { n:"Quesadillas con frijoles", d:"El clásico que nunca falla." }
+      ]}
   ]},
   { dia:"Sábado", comidas:[
     { t:"Desayuno", n:"Yogur con fruta y granola 🥣", juntos:true,
-      d:"Yogur natural con plátano o fresas y granola. ⚠️ Elige granola sin cacahuate ni frutos secos: revisa la etiqueta." },
+      d:"Yogur natural con plátano o fresas y granola. ⚠️ Elige granola sin cacahuate ni frutos secos: revisa la etiqueta.",
+      alt:[
+        { n:"Hot cakes de plátano", d:"Machaca 1 plátano y mézclalo en la masa de hot cakes. Quedan más dulces sin azúcar extra." },
+        { n:"Avena con manzana y canela", d:"Avena cocida con manzana picada y canela. Calientita para el fin de semana." }
+      ]},
     { t:"Comida", n:"Pollo con arroz y verdura 🍗", juntos:true,
-      d:"La misma comida que la tuya, en porción chica. Si se resiste a la verdura, dale más arroz y una o dos piezas de verdura para probar, sin pelear." },
+      d:"La misma comida que la tuya, en porción chica. Si se resiste a la verdura, dale más arroz y una o dos piezas de verdura para probar, sin pelear.",
+      alt:[
+        { n:"Milanesa de pollo con puré de papa", d:"Pollo aplanado, pasado por huevo batido y pan molido, dorado al sartén. El huevo va cocinado dentro del empanizado, así que sí puede. Puré: papa cocida machacada con leche." },
+        { n:"Picadillo con arroz", d:"Carne molida con papa y zanahoria en cubitos, guisada con jitomate. Rinde para dos días." }
+      ]},
     { t:"Cena", n:"Sopa de fideo con queso 🍜",
-      d:"Fideo dorado ligeramente, puré de jitomate y agua, 10 minutos a fuego medio. Queso rallado encima. A casi todos los niños les encanta." }
+      d:"Fideo dorado ligeramente, puré de jitomate y agua, 10 minutos a fuego medio. Queso rallado encima. A casi todos los niños les encanta.",
+      alt:[
+        { n:"Sincronizadas", d:"Tortillas de harina con jamón y queso, en triángulos." },
+        { n:"Tacos de frijol con queso", d:"Rápidos y ligeros para la noche." }
+      ]}
   ]},
   { dia:"Domingo", comidas:[
     { t:"Desayuno", n:"Licuado de plátano con avena 🥤",
-      d:"Leche + 1 plátano + 2 cucharadas de avena a la licuadora. Con pan tostado con mermelada o mantequilla (de leche, nunca de cacahuate)." },
+      d:"Leche + 1 plátano + 2 cucharadas de avena a la licuadora. Con pan tostado con mermelada o mantequilla (de leche, nunca de cacahuate).",
+      alt:[
+        { n:"Molletes dulces", d:"Pan con mantequilla y mermelada, tostado, con un vaso de leche." },
+        { n:"Hot cakes", d:"El desayuno de domingo favorito de casi cualquier niño." }
+      ]},
     { t:"Comida", n:"Lentejas con arroz 🍲", juntos:true,
-      d:"Las mismas lentejas que las tuyas, servidas con arroz. Si no le encantan, licúalas como crema y sírvela con queso espolvoreado: cambia todo." }
+      d:"Las mismas lentejas que las tuyas, servidas con arroz. Si no le encantan, licúalas como crema y sírvela con queso espolvoreado: cambia todo.",
+      alt:[
+        { n:"Espagueti con crema y jamón", d:"Pasta cocida mezclada con crema, jamón en cubitos y queso. A los niños les fascina." },
+        { n:"Sopa de verduras con pollo y arroz", d:"Verdura congelada + pollo desmenuzado + arroz en caldo. Todo en una olla." }
+      ]}
   ]}
 ];
 function pintarHija(){
@@ -490,11 +535,22 @@ function pintarHija(){
     card.className = "card";
     let html = '<span class="tag">'+g.dia+'</span>';
     g.comidas.forEach(c=>{
+      let alts = "";
+      if (c.alt && c.alt.length){
+        alts = '<details style="margin-top:6px"><summary style="font-size:13px;font-weight:700;color:var(--green);cursor:pointer;list-style:none">➕ Más opciones ('+c.alt.length+')</summary>';
+        c.alt.forEach(a=>{
+          alts += '<div style="margin-top:8px;padding-left:10px;border-left:2.5px solid var(--line)">'+
+            '<div style="font-weight:700;font-size:14px">'+a.n+'</div>'+
+            '<div style="font-size:13px;color:var(--ink-soft)">'+a.d+'</div></div>';
+        });
+        alts += '</details>';
+      }
       html += '<div class="receta" style="padding:12px 0">'+
         '<div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)">'+c.t+
         (c.juntos ? ' · <span style="color:var(--green)">comen lo mismo 👨‍👧</span>' : '')+'</div>'+
         '<div style="font-weight:700;font-size:15px;margin:2px 0 4px">'+c.n+'</div>'+
         '<div style="font-size:13.5px;color:var(--ink-soft)">'+c.d+'</div>'+
+        alts+
       '</div>';
     });
     card.innerHTML = html;
@@ -717,13 +773,6 @@ document.querySelectorAll("nav button").forEach(b=>{
     av.style.display = "block";
   }
 })();
-
-/* ================= PWA: registro del service worker ================= */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
-  });
-}
 </script>
 </body>
 </html>
