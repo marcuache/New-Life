@@ -1,16 +1,22 @@
 {
-  "name": "Mi Entrenamiento",
-  "short_name": "Entreno",
-  "description": "Plan de entrenamiento en casa, comidas y seguimiento de peso.",
+  "name": "New Life · Plan 90 Días",
+  "short_name": "New Life 90",
+  "description": "Entrenamiento en casa con mancuernas, control metabólico de 90 días y menú empatado padre e hija.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
-  "lang": "es-MX",
   "background_color": "#F2F5F1",
-  "theme_color": "#245C43",
+  "theme_color": "#16382A",
+  "orientation": "portrait-primary",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

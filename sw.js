@@ -1,56 +1,41 @@
-/* Mi Entrenamiento - Service Worker
-   Sube el número de versión (v1 -> v2) solo si cambias los íconos o el manifest.
-   Para cambios en index.html NO necesitas tocar nada: se actualiza solo al abrir con internet. */
-const CACHE = 'entreno-v1';
+const CACHE_NAME = "new-life-90-v2";
 const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './icon-180.png'
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon-180.png",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
-self.addEventListener('install', (e) => {
+self.addEventListener("install", event => {
   self.skipWaiting();
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS).catch(() => {}))
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
-
-  // HTML / navegación: intenta la red primero (ves la última versión), respaldo al cache si no hay internet
-  if (req.mode === 'navigate') {
-    e.respondWith(
-      fetch(req)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put('./index.html', copy));
-          return res;
-        })
-        .catch(() => caches.match('./index.html'))
-    );
-    return;
-  }
-
-  // Resto de archivos (íconos, manifest): cache primero, con respaldo a la red
-  e.respondWith(
-    caches.match(req).then((cached) =>
-      cached ||
-      fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy));
-        return res;
-      }).catch(() => cached)
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET") return;
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      const networked = fetch(event.request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => cached);
+      return cached || networked;
+    })
   );
 });
