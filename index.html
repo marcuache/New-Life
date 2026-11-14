@@ -36,7 +36,7 @@
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--bg);color:var(--ink);
     padding-top:env(safe-area-inset-top);
-    padding-bottom:calc(92px + env(safe-area-inset-bottom));
+    padding-bottom:calc(94px + env(safe-area-inset-bottom));
     font-size:15.5px;line-height:1.45;
   }
   .wrap{max-width:560px;margin:0 auto;padding:16px 14px 12px}
@@ -46,7 +46,6 @@
     .grid-2-ipad > .card{margin-bottom:0}
   }
 
-  /* ---------- encabezado ---------- */
   header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;gap:10px}
   .kicker{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:800}
   h1{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-top:2px}
@@ -54,14 +53,12 @@
   .badge-reto{background:var(--green-deep);color:var(--lime);padding:6px 11px;border-radius:12px;font-size:12px;font-weight:800;text-align:right;white-space:nowrap}
   .badge-reto span{display:block;font-size:10px;color:#A9C4B2;font-weight:600;text-transform:uppercase}
 
-  /* ---------- tarjetas ---------- */
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
   .card h2{font-size:17px;font-weight:800;margin-bottom:4px;letter-spacing:-.01em}
   .card .sub{font-size:13px;color:var(--ink-soft);margin-bottom:12px}
   .card.dark{background:var(--green-deep);border-color:var(--green-deep);color:#EAF3EC}
   .card.dark .sub{color:#A9C4B2}
 
-  /* ---------- botones ---------- */
   .btn{display:block;width:100%;border:none;border-radius:14px;padding:13px 16px;font-size:15.5px;font-weight:800;cursor:pointer;font-family:inherit;text-align:center;transition:transform .1s}
   .btn-primary{background:var(--lime);color:var(--lime-ink)}
   .btn-primary:active{transform:scale(.985)}
@@ -70,7 +67,6 @@
   .btn:disabled{opacity:.45;cursor:not-allowed}
   .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 
-  /* ---------- selectores de fase, día y modo (Casa vs Gym) ---------- */
   .fases{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
   .fase-btn{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:8px 6px;text-align:center;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:700;color:var(--ink-soft)}
   .fase-btn strong{display:block;font-size:12.5px;color:var(--ink)}
@@ -89,7 +85,14 @@
   .modo-btn{border:none;background:transparent;border-radius:10px;padding:9px 8px;font-family:inherit;font-size:13px;font-weight:800;color:var(--green-deep);cursor:pointer;transition:all .15s}
   .modo-btn.activo{background:var(--card);color:var(--green-deep);box-shadow:0 2px 6px rgba(0,0,0,.08)}
 
-  /* ---------- ejercicios ---------- */
+  /* ---------- barra de circuito ---------- */
+  .circuito-box{background:#E8F6EE;border:1.5px solid #B7E1C7;border-radius:14px;padding:12px;margin-bottom:12px}
+  .circuito-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .circuito-title{font-size:13.5px;font-weight:800;color:var(--green-deep)}
+  .vueltas-pills{display:flex;gap:6px}
+  .v-pill{width:30px;height:30px;border-radius:9px;border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--green);background:#fff;cursor:pointer}
+  .v-pill.hecha{background:var(--green);color:#fff}
+
   .ej{padding:13px 0;border-bottom:1px solid var(--line)}
   .ej:last-child{border-bottom:none}
   .ej-top{display:flex;align-items:flex-start;gap:11px}
@@ -106,7 +109,6 @@
   .kg-input-wrap span{font-size:11.5px;color:var(--ink-soft);font-weight:700}
   .ult-peso{font-size:11.5px;color:var(--green);font-weight:700;background:#E4EEE6;padding:3px 8px;border-radius:99px}
 
-  /* ---------- cronómetro de descanso ---------- */
   .timer-display{font-size:48px;font-weight:800;letter-spacing:-.02em;text-align:center;margin:4px 0 10px;font-variant-numeric:tabular-nums;color:var(--lime)}
   .timer-display.listo{font-size:22px;color:#fff;margin:10px 0 12px}
   .timer-botones{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
@@ -119,7 +121,6 @@
 
   .aviso-ok{background:#E9F5E4;border:1px solid #BFDDB4;color:#2C5626;border-radius:12px;padding:12px;font-size:14px;font-weight:700;margin-bottom:12px;display:none}
 
-  /* ---------- hábitos diarios ---------- */
   .habito{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
   .habito:last-child{border-bottom:none}
   .habito .h-txt{flex:1;font-size:13.8px;font-weight:600}
@@ -127,7 +128,6 @@
   .habito.hecho .check{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
   .habito.hecho .h-txt{color:var(--ink-soft);text-decoration:line-through}
 
-  /* ---------- laboratorios ---------- */
   .lab-grid{display:grid;grid-template-columns:1fr;gap:10px}
   .lab-item{border:1px solid var(--line);border-radius:14px;padding:12px;background:#FAFBF9}
   .lab-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
@@ -139,7 +139,6 @@
   .lab-vals{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
   .lab-vals strong{color:var(--ink);font-size:14px}
 
-  /* ---------- comidas ---------- */
   .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:#E4EEE6;color:var(--green);border-radius:99px;padding:4px 10px;margin-bottom:8px}
   .tag.warn{background:var(--danger-bg);color:var(--danger)}
   .receta{padding:12px 0;border-bottom:1px solid var(--line)}
@@ -154,7 +153,6 @@
   .receta .paso{margin:4px 0}
   .empate-pill{display:inline-block;font-size:11px;font-weight:700;background:#E8F6EE;color:#1F6B3B;padding:2px 8px;border-radius:6px;margin-top:4px}
 
-  /* ---------- peso y cintura ---------- */
   .peso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
   .peso-box .v{font-size:19px;font-weight:800;letter-spacing:-.02em}
   .peso-box .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:700;margin-top:2px}
@@ -170,11 +168,9 @@
   .hist-item .fecha-h{color:var(--ink-soft);font-size:12.5px}
   .x-btn{border:none;background:none;color:var(--danger);font-size:16px;cursor:pointer;padding:4px 8px;font-family:inherit}
 
-  /* ---------- gráfica ---------- */
   .chart-wrap{margin-top:6px}
   svg{display:block;width:100%;height:auto}
 
-  /* ---------- progreso ---------- */
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:13px 8px;text-align:center}
   .stat .v{font-size:23px;font-weight:800;color:var(--green)}
@@ -187,7 +183,6 @@
 
   .vacio{text-align:center;color:var(--ink-soft);font-size:13.5px;padding:16px 8px}
 
-  /* ---------- navegación inferior ---------- */
   nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.03)}
   nav button{flex:1;border:none;background:none;padding:9px 2px 7px;cursor:pointer;font-family:inherit;color:var(--ink-soft)}
   nav button .ico{font-size:19px;display:block}
@@ -205,7 +200,7 @@
 <div class="wrap">
   <header>
     <div>
-      <div class="kicker">Plan Híbrido 90d · Casa (16kg) + Gimnasio</div>
+      <div class="kicker">Plan Híbrido 90d · Circuito 16kg + Gym</div>
       <h1 id="titulo">Hoy toca entrenar</h1>
       <div class="fecha" id="fechaHoy"></div>
     </div>
@@ -221,8 +216,8 @@
 
     <div class="grid-2-ipad">
       <div class="card dark">
-        <h2>Descanso entre series ⏱️</h2>
-        <div class="sub">Toca el tiempo al terminar tu serie. En casa (16 kg fijos) usa 45-60s para mayor densidad metabólica.</div>
+        <h2>Cronómetro de Circuito / Series ⏱️</h2>
+        <div class="sub">En circuito: pasa del ejercicio 1 al 5 (15s para cambiar) y al terminar la vuelta descansa 90s.</div>
         <div class="timer-display listo" id="timerDisplay" aria-live="polite">Listo para darlo todo</div>
         <div class="timer-botones">
           <button class="t-btn" data-seg="45">45 s</button>
@@ -234,7 +229,7 @@
 
       <div class="card">
         <h2>Hábitos Metabólicos + Despertar 6 AM 🎯</h2>
-        <div class="sub">Metas diarias para triglicéridos (&lt;150), ácido úrico (&lt;6.0) y transición de horario</div>
+        <div class="sub">Claves para triglicéridos (&lt;150), ácido úrico (&lt;6.0) y transición de horario</div>
         <div id="listaHabitos"></div>
       </div>
     </div>
@@ -243,7 +238,7 @@
       <div class="fases" id="selectorFases"></div>
       <div class="dias" id="selectorDias"></div>
       <div class="modo-switch" id="selectorModo">
-        <button class="modo-btn" data-modo="casa">🏠 En Casa (Mancuernas 16 kg)</button>
+        <button class="modo-btn" data-modo="casa">🏠 En Casa (Circuito 16 kg)</button>
         <button class="modo-btn" data-modo="gym">🏢 En Gimnasio (Poleas/Máquinas)</button>
       </div>
     </div>
@@ -251,20 +246,23 @@
     <div class="card">
       <h2 id="tituloDia"></h2>
       <div class="sub" id="subDia"></div>
+
+      <!-- Contador rápido de Vueltas de Circuito -->
+      <div class="circuito-box">
+        <div class="circuito-top">
+          <span class="circuito-title" id="lblVueltas">🔄 Vueltas del Circuito (0 / 4)</span>
+          <div class="vueltas-pills" id="ContenedorPillsVueltas"></div>
+        </div>
+        <button class="btn btn-secondary" id="btnCompletarVuelta" style="padding:10px 12px;font-size:14px">
+          ⚡ Terminé una vuelta → Descansar 90 s
+        </button>
+      </div>
+
       <div class="progreso-sesion"><div id="barraSesion" style="width:0%"></div></div>
       <div id="listaEjercicios"></div>
     </div>
 
     <button class="btn btn-primary" id="btnGuardarSesion">Terminar y guardar sesión</button>
-
-    <div class="card" style="margin-top:14px">
-      <h2>🛡️ Biomecánica Lumbar en tus Equipos del Gym y Casa</h2>
-      <div style="font-size:13.2px;color:var(--ink-soft)">
-        • <strong style="color:var(--ink)">Cómo progresar con tus mancuernas fijas de 16 kg:</strong> Como ya dominas los 16 kg y no suben más de peso, progresamos con <strong>ejercicios unilaterales</strong> (16 kg o 32 kg en una sola pierna), <strong>tempo 3-1-1</strong> (bajar en 3 segundos, pausar 1 seg sin rebote) y acortando descansos.<br>
-        • <strong style="color:var(--ink)">En la Máquina de Remo (Gym):</strong> Empuja primero con las piernas manteniendo el torso recto como bloque. <strong>Prohibido redondear la espalda baja</strong> o inclinarte de más hacia el frente al regresar el maneral.<br>
-        • <strong style="color:var(--ink)">En la Multufuncional y Torre de Poleas (Gym):</strong> Aprovecha el respaldo fijo para press, pec deck, jalón al pecho y extensión de cuádriceps sin compresión vertebral.
-      </div>
-    </div>
   </section>
 
   <!-- ============ 2. SALUD / LABS ============ -->
@@ -275,28 +273,25 @@
     </div>
 
     <div class="card">
-      <span class="tag">⏰ Plan de Transición a las 6:00 AM (Para ir al Gym antes del Hospital)</span>
+      <span class="tag">⏰ Plan de Transición a las 6:00 AM (Sin subir cortisol)</span>
       <div style="font-size:13.4px;color:var(--ink-soft)">
-        Adelantar el despertador de golpe 1 hora eleva el cortisol matutino y sube la glucosa en ayuno. Hazlo en 3 escalones de 20 minutos:<br>
-        • <strong style="color:var(--ink)">Semanas 1 y 2 (6:40 AM):</strong> Martes y jueves entrenas en casa con tus mancuernas de 16 kg; sábado y domingo vas al gimnasio.<br>
-        • <strong style="color:var(--ink)">Semanas 3 y 4 (6:20 AM):</strong> Deja ropa y termo listos la noche anterior. Cena ligero antes de las 9:00 PM.<br>
-        • <strong style="color:var(--ink)">Mes 2 y 3 (6:00 AM fijo):</strong> Ya adaptado, cambia el interruptor de Martes y Jueves a <strong>🏢 Modo Gimnasio</strong> para entrenar en máquinas/poleas antes de irte a trabajar.
+        • <strong style="color:var(--ink)">Semanas 1 y 2 (6:40 AM):</strong> Martes y jueves haces tu circuito dinámico de 25 min en casa con mancuernas de 16 kg; sábado y domingo vas al gimnasio.<br>
+        • <strong style="color:var(--ink)">Semanas 3 y 4 (6:20 AM):</strong> Deja ropa y agua listas la noche anterior. Cena ligero antes de las 9:00 PM.<br>
+        • <strong style="color:var(--ink)">Mes 2 y 3 (6:00 AM fijo):</strong> Ya adaptado, cambia el interruptor de Martes y Jueves a <strong>🏢 Modo Gimnasio</strong> antes de irte al hospital.
       </div>
     </div>
 
     <div class="card">
-      <span class="tag warn">⚠️ Auditoría de tus Suplementos Actuales</span>
+      <span class="tag warn">⚠️ Auditoría de tus Suplementos</span>
       <h2>¿Por qué salieron los triglicéridos en 563 mg/dL?</h2>
       <div style="font-size:13.5px;color:var(--ink-soft);margin-top:6px">
-        <p style="margin-bottom:8px"><strong style="color:var(--danger)">1. Suspender de inmediato la proteína "Euphoric" ($399 por 2.27 kg):</strong> Una bolsa de 5 libras de suero de leche real (Whey) nunca cuesta $399 MXN en materia prima. Esas fórmulas económicas están rellenas de <strong>maltodextrina, harinas refinadas, sólidos de maíz y azúcares simples</strong>. Tomarla desde agosto equivale a tomar un concentrado de carbohidratos de alto índice glucémico todos los días: el hígado convierte ese exceso directamente en <strong>triglicéridos (563 mg/dL)</strong>, sube la <strong>glucosa en ayuno (102 mg/dL)</strong> y eleva el <strong>ácido úrico (7.2 mg/dL)</strong>.</p>
-        <p style="margin-bottom:8px"><strong style="color:var(--ink)">2. ¿Cómo sustituirla?:</strong> Con pollo, atún, huevo, claras, lentejas y queso panela cubres tus requerimientos reales sin harinas ocultas.</p>
-        <p><strong style="color:var(--green)">3. Creatina Beyond Vitamins (450 g):</strong> Hazle la <strong>prueba del yodo (Isodine)</strong>: disuelve media cucharadita en agua y pon 2 gotas de Isodine; si queda color ámbar/amarillo es libre de almidón; si se vuelve azul oscuro o negro, tiene harina y debes desecharla. Toma <strong>5 g diarios con agua simple</strong> y mantén mínimo 2.5 L de agua al día.</p>
+        <p style="margin-bottom:8px"><strong style="color:var(--danger)">1. Suspender proteína "Euphoric" ($399 por 2.27 kg):</strong> Rellena de maltodextrina y harinas rápidas que el hígado convierte en triglicéridos (563 mg/dL) y glucosa (102 mg/dL).</p>
+        <p><strong style="color:var(--green)">2. Creatina Beyond Vitamins (450 g):</strong> Hazle la prueba con 2 gotas de Isodine en agua: si queda ámbar es pura (toma 5 g diarios con 2.5 L de agua); si se pone azul/negra tiene almidón.</p>
       </div>
     </div>
 
     <div class="card">
       <h2>Semáforo de Biomarcadores (Lab 03/11/2026 vs Meta)</h2>
-      <div class="sub">Registra tus nuevos valores cuando te tomes el control de los 3 meses.</div>
       <div class="lab-grid" id="listaLabs"></div>
     </div>
 
@@ -316,33 +311,23 @@
     </div>
   </section>
 
-  <!-- ============ 3. COMIDAS ============ -->
+  <!-- ============ 3. COMIDAS Y SÚPER INTERACTIVO ============ -->
   <section class="pantalla" id="p-comidas">
     <div class="card dark">
-      <h2>Nutrición Anti-Triglicéridos + Empatada 👨‍👧</h2>
-      <div class="sub">Meta: ~1,950 kcal/día · Alta en proteína (~155g) y fibra soluble · Cero azúcares líquidos y harinas refinadas. Cocinas una sola base para ti y para tu hija.</div>
+      <h2>Nutrición Anti-Triglicéridos + Lista de Súper 👨‍👧</h2>
+      <div class="sub">~1,950 kcal/día · Alta en proteína (~155g) y fibra soluble · Cero azúcares líquidos. Misma comida base para ti y tu hija.</div>
     </div>
 
     <div class="card">
-      <span class="tag">Reglas Clínicas para Bajar de 563 a &lt;150 mg/dL</span>
-      <div style="font-size:13.5px;color:var(--ink-soft)">
-        • <strong style="color:var(--ink)">Elimina por 90 días:</strong> Proteína Euphoric, refrescos, jugos (incluso naturales), pan dulce, galletas, frituras, alcohol y exceso de harinas blancas.<br>
-        • <strong style="color:var(--ink)">Carbohidratos inteligentes (porción controlada):</strong> Máximo 2 tortillas de maíz por comida o ½ taza de arroz/lentejas/frijoles cocidos o ½ taza de avena.<br>
-        • <strong style="color:var(--ink)">Para bajar Ácido Úrico (7.2):</strong> Toma 2.5 a 3 L de agua natural al día, evita vísceras, embutidos grasos y jarabe de maíz de alta fructosa.<br>
-        • <strong style="color:var(--ink)">Grasas protectoras (Omega-3):</strong> 1 cucharada de semillas de chía o linaza en tu avena/yogur, aguacate, aceite de oliva y atún/sardina (solo en tu plato).
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span class="tag" style="margin-bottom:0">🛒 Carrito Semanal Interactivo</span>
+        <button id="btnResetSuper" style="border:none;background:none;color:var(--green);font-size:12.5px;font-weight:800;cursor:pointer">↺ Reiniciar semana</button>
       </div>
+      <div class="sub">Toca cada alimento conforme lo metas al carrito en el súper. Cantidades exactas para 1 semana (tú y tu hija).</div>
+      <div id="listaSuperInteractiva"></div>
     </div>
 
     <div id="listaComidas"></div>
-
-    <div class="card">
-      <span class="tag">Lista de Súper Inteligente · Para los Dos 🛒</span>
-      <div style="font-size:13.8px;color:var(--ink-soft)">
-        <strong style="color:var(--ink)">Proteínas magras:</strong> Pechuga y muslos de pollo sin piel · Carne molida de res magra (90/10) · Queso panela y queso Oaxaca/manchego ligero · Yogur griego natural sin azúcar · Huevos y claras (para ti y en masa horneada para ella) · Atún en agua y sardinas (solo para ti, cero mariscos).<br><br>
-        <strong style="color:var(--ink)">Carbohidratos de bajo índice glucémico y fibra:</strong> Avena en hojuelas entera · Lentejas · Frijoles · Arroz · Tortillas de maíz · Pan integral 100% (revisar etiqueta sin cacahuate) · Semillas de chía.<br><br>
-        <strong style="color:var(--ink)">Verduras y frutas enteras:</strong> Espinacas, calabacitas, brócoli, ejotes, nopales, jitomate, cebolla, ajo, pepino, aguacate · Fresas, manzana, pera, uvas, plátano (controlado) y limones. <strong>Sin piña 🚫🍍, sin cacahuate 🚫🥜, sin mariscos 🚫🦐.</strong>
-      </div>
-    </div>
   </section>
 
   <!-- ============ 4. MI HIJA ============ -->
@@ -351,7 +336,7 @@
       <h2>El Menú Seguro de tu Peque 👧</h2>
       <div class="sub">
         🚫 <strong>Cero cacahuate/maní, cero mariscos, cero piña y cero huevo directo</strong> (revuelto, estrellado o cocido).<br>
-        ✅ <strong>Sí puede comer:</strong> Huevo horneado o integrado en mezclas (hot cakes de avena, milanesa empanizada, pasta) y todas las comidas base de pollo, carne magra, queso, frijoles y lentejas que preparas para ti.
+        ✅ <strong>Sí puede comer:</strong> Huevo horneado/cocinado en mezclas (hot cakes de avena, milanesa) y las bases de pollo, res magra, queso, frijoles y lentejas.
       </div>
     </div>
     <div id="listaHija"></div>
@@ -371,7 +356,7 @@
     <div class="grid-2-ipad">
       <div class="card">
         <h2>Registrar Peso y Cintura</h2>
-        <div class="sub">Pésate 1 vez por semana en ayunas. Medir tu cintura al nivel del ombligo refleja la pérdida de grasa visceral.</div>
+        <div class="sub">Pésate 1 vez por semana en ayunas.</div>
         <div class="fila-registro">
           <input type="number" inputmode="decimal" step="0.1" min="40" max="250" id="inputPeso" placeholder="Peso kg (ej. 92.2)">
           <input type="number" inputmode="decimal" step="0.5" min="50" max="180" id="inputCintura" placeholder="Cintura cm (opc)">
@@ -391,7 +376,7 @@
     </div>
   </section>
 
-  <!-- ============ 6. PROGRESO Y SINCRONIZACIÓN ============ -->
+  <!-- ============ 6. PROGRESO Y ACTUALIZACIÓN RÁPIDA ============ -->
   <section class="pantalla" id="p-progreso">
     <div class="stats">
       <div class="stat"><div class="v" id="statTotal">0</div><div class="l">Sesiones</div></div>
@@ -402,23 +387,24 @@
     <div class="grid-2-ipad">
       <div class="card">
         <h2>Cumplimiento Semanal</h2>
-        <div class="sub">Meta: Martes, Jueves, Sábado y Domingo (Casa 16kg o Gym)</div>
+        <div class="sub">Meta: Martes, Jueves, Sábado y Domingo</div>
         <div class="semana" id="semanaVista"></div>
       </div>
 
       <div class="card">
-        <h2>Sincronizar Android ↔ iPad 🔄</h2>
-        <div class="sub">Tus datos se guardan en este dispositivo. Exporta o importa tu archivo de respaldo para llevar el mismo historial en tu celular y tu iPad.</div>
+        <h2>Sincronizar y Actualizar App 🔄</h2>
+        <div class="sub">Exporta/importa tus datos entre Android e iPad, o fuerza la descarga de la última versión de tu GitHub.</div>
         <div class="btn-row">
           <button class="btn btn-secondary" id="btnExportar">⬇ Exportar JSON</button>
           <button class="btn btn-ghost" id="btnImportarTrigger">⬆ Importar JSON</button>
         </div>
+        <button class="btn btn-ghost" id="btnForzarUpdate" style="margin-top:8px;font-size:13.5px">⚡ Actualizar versión desde GitHub (Limpiar caché)</button>
         <input type="file" id="inputImportFile" accept=".json,application/json" style="display:none">
       </div>
     </div>
 
     <div class="card" style="margin-top:14px">
-      <h2>Últimas Sesiones y Modalidad</h2>
+      <h2>Últimas Sesiones</h2>
       <div id="histSesiones"><div class="vacio">Cuando termines tu primera sesión aparecerá aquí. ¡Vamos por esos 90 días! 💪</div></div>
     </div>
   </section>
@@ -427,97 +413,96 @@
 <nav>
   <button data-p="p-entrenar" class="activo"><span class="ico">🏋️</span><span class="txt">Entrenar</span></button>
   <button data-p="p-salud"><span class="ico">🩺</span><span class="txt">Salud/Labs</span></button>
-  <button data-p="p-comidas"><span class="ico">🥗</span><span class="txt">Nutrición</span></button>
+  <button data-p="p-comidas"><span class="ico">🛒</span><span class="txt">Menú/Súper</span></button>
   <button data-p="p-hija"><span class="ico">👧</span><span class="txt">Mi Hija</span></button>
   <button data-p="p-peso"><span class="ico">⚖️</span><span class="txt">Peso</span></button>
   <button data-p="p-progreso"><span class="ico">📈</span><span class="txt">Progreso</span></button>
 </nav>
 
 <script>
-/* ================= CONFIGURACIÓN CLÍNICA Y FASES (90 DÍAS) ================= */
 const ALTURA_M = 1.72;
 const FECHA_INICIO_RETO = "2026-11-10";
 
 const FASES = {
-  1: { nombre:"Mes 1 · Adaptación Híbrida", sem:"Sem 1-4 (6:40→6:20 AM)", nota:"En casa: 3-4 series con mancuernas de 16 kg controlando bajada en 3 seg. Fin de semana: Gimnasio." },
-  2: { nombre:"Mes 2 · Densidad + Gym 6 AM", sem:"Sem 5-8 (6:00 AM)", nota:"4 series por ejercicio · En casa: pausas isométricas de 2 seg · En Gym: sube 1 placa en poleas." },
-  3: { nombre:"Mes 3 · Recomposición Total", sem:"Sem 9-12 (6:00 AM)", nota:"4 series · Descansos de 45-60 s para máxima sensibilidad a la insulina antes del laboratorio." }
+  1: { nombre:"Mes 1 · Circuito Híbrido", sem:"Sem 1-4 (6:40→6:20 AM)", vueltas:3, nota:"En casa: Circuito de 3 vueltas sin aburrirte (15s entre ejercicios y 90s al terminar la vuelta)." },
+  2: { nombre:"Mes 2 · Densidad + Gym 6 AM", sem:"Sem 5-8 (6:00 AM)", vueltas:4, nota:"4 vueltas al circuito o 4 series en gimnasio · Mayor oxidación de glucosa y triglicéridos." },
+  3: { nombre:"Mes 3 · Recomposición Total", sem:"Sem 9-12 (6:00 AM)", vueltas:4, nota:"4 vueltas intensas · Descansos de 60-90s previo a tu toma de laboratorio." }
 };
 
-/* Cada día tiene versión CASA (Mancuernas tope 16 kg con sobrecarga mecánica/tempo) y versión GYM (Torre de poleas, Multifuncional sentado y Remo) */
+/* Orden intercalado en casa (PHA Circuit) para no fatigar el mismo músculo ni aburrirse esperando */
 const PLAN = {
   martes: {
     modoDefault: "casa",
     casa: {
-      nombre:"Martes · Pierna y Glúteo en Casa (Mancuernas 16 kg)",
-      sub:"Como tus mancuernas están al tope (16 kg), usamos trabajo unilateral y bajada en 3 segundos para multiplicar la carga efectiva.",
+      nombre:"Martes · Circuito Pierna y Core (Mancuernas 16 kg)",
+      sub:"Orden intercalado para hacerlo en circuito continuo: pasas del 1 al 5 (15s para cambiar) y descansas 90s al cerrar la vuelta.",
       ejercicios:[
-        {id:"m_c1", n:"Sentadilla Búlgara / Split Squat", d:"4 × 10 por pierna · 1 o 2 mancuernas de 16 kg, baja en 3 seg vertical sin inclinar la espalda", usaKg:true, defKg:"16"},
-        {id:"m_c2", n:"Sentadilla Goblet con Pausa (Tempo 3-2-1)", d:"4 × 12-15 · Mancuerna de 16 kg al pecho, baja en 3 seg, haz pausa de 2 seg rozando la silla y sube", usaKg:true, defKg:"16"},
-        {id:"m_c3", n:"Hip Thrust Unilateral o con Pausa 3s en sofá", d:"4 × 12-15 · Espalda alta en sofá, mancuerna de 16 kg en cadera, sostén 3 seg arriba apretando glúteo", usaKg:true, defKg:"16"},
-        {id:"m_c4", n:"Elevación de talones a 1 pierna con mancuerna", d:"3 × 15 por lado · Sostén 16 kg de un lado y apóyate en la pared, pausa 2 seg arriba", usaKg:true, defKg:"16"},
-        {id:"m_c5", n:"Bird Dog con pausa isométrica", d:"3 × 10 por lado · En 4 puntos, extiende brazo y pierna contraria sosteniendo 3 seg sin arquear lumbar", usaKg:false}
+        {id:"m_c1", n:"1. Sentadilla Goblet con Pausa (Tempo 3-2-1)", d:"12 a 15 reps · Mancuerna de 16 kg al pecho, baja en 3s, pausa 2s rozando la silla y sube", usaKg:true, defKg:"16"},
+        {id:"m_c2", n:"2. Bird Dog controlado (Recuperación activa)", d:"10 reps por lado · En 4 puntos, estira brazo y pierna contraria 2s sin arquear cintura", usaKg:false},
+        {id:"m_c3", n:"3. Hip Thrust en sofá con mancuerna (Pausa 3s)", d:"15 reps · Espalda alta en sofá, mancuerna de 16 kg en cadera, aprieta glúteo 3s arriba", usaKg:true, defKg:"16"},
+        {id:"m_c4", n:"4. Elevación de talones a 1 pierna", d:"15 reps por lado · Sostén 16 kg mientras tus muslos recuperan aliento", usaKg:true, defKg:"16"},
+        {id:"m_c5", n:"5. Split Squat / Sentadilla Búlgara", d:"10 reps por pierna · Cierra fuerte la vuelta bajando vertical con espalda neutra", usaKg:true, defKg:"16"}
       ]
     },
     gym: {
       nombre:"Martes · Pierna y Core en Gimnasio (6:00 AM)",
-      sub:"Enfocado en la Estación Multifuncional, Torre de Poleas y Mancuernas sin comprimir la columna.",
+      sub:"Enfocado en la Estación Multifuncional, Torre de Poleas y Remo sin comprimir la columna.",
       ejercicios:[
-        {id:"m_g1", n:"Extensión de Cuádriceps en Multifuncional", d:"4 × 12-15 · Espalda bien pegada al respaldo, extiende piernas y sostén 2 seg arriba antes de bajar lento", usaKg:true, defKg:"35"},
-        {id:"m_g2", n:"Sentadilla Búlgara o Prensa/Goblet", d:"4 × 10 por pierna · Torso erguido, rodilla alineada con la punta del pie", usaKg:true, defKg:"16"},
-        {id:"m_g3", n:"Abducción y Patada de Glúteo en Polea Baja", d:"3 × 15 por pierna · En la torre de polea baja, torso firme sujetándote de la estructura", usaKg:true, defKg:"15"},
-        {id:"m_g4", n:"Pallof Press en Polea Media (Anti-rotación)", d:"3 × 12 por lado · Polea a la altura del pecho, extiende brazos al frente resistiendo el giro (blinda tu lumbar)", usaKg:true, defKg:"15"},
-        {id:"m_g5", n:"Remo Metabólico en Máquina (Espalda Neutra)", d:"8 min ritmo constante · Empuja con piernas manteniendo espalda 100% recta sin encorvarte al frente", usaKg:false}
+        {id:"m_g1", n:"1. Extensión de Cuádriceps en Multifuncional", d:"12-15 reps · Espalda pegada al respaldo, sostén 2 seg arriba antes de bajar lento", usaKg:true, defKg:"35"},
+        {id:"m_g2", n:"2. Pallof Press en Polea Media (Anti-rotación)", d:"12 reps por lado · Extiende brazos al frente resistiendo el giro del cable", usaKg:true, defKg:"15"},
+        {id:"m_g3", n:"3. Sentadilla Búlgara o Goblet con Mancuerna", d:"10 reps por pierna · Torso erguido, rodilla alineada", usaKg:true, defKg:"16"},
+        {id:"m_g4", n:"4. Abducción y Patada de Glúteo en Polea Baja", d:"15 reps por pierna · En la torre de polea baja, torso firme", usaKg:true, defKg:"15"},
+        {id:"m_g5", n:"5. Remo Metabólico en Máquina (Espalda Neutra)", d:"8 min al final · Empuja con piernas manteniendo espalda 100% recta", usaKg:false}
       ]
     }
   },
   jueves: {
     modoDefault: "casa",
     casa: {
-      nombre:"Jueves · Tren Superior en Casa (Mancuernas 16 kg)",
-      sub:"Fuerza e hipertrofia con mancuernas de 16 kg protegiendo la zona lumbar con apoyo en suelo y silla.",
+      nombre:"Jueves · Circuito Tren Superior + Core (Mancuernas 16 kg)",
+      sub:"Empuje + Tracción + Hombro + Brazos + Abdomen corrido sin tiempos muertos.",
       ejercicios:[
-        {id:"j_c1", n:"Floor Press con Mancuernas de 16 kg (Pausa 1s)", d:"4 × 12-15 · Acostado en el suelo con rodillas dobladas, baja hasta que los tríceps toquen el piso 1 seg y empuja", usaKg:true, defKg:"16"},
-        {id:"j_c2", n:"Remo a un brazo con apoyo en silla (Pausa 2s arriba)", d:"4 × 12 por lado · Mano y rodilla en silla, jala los 16 kg a la cadera y aprieta dorsal 2 seg arriba", usaKg:true, defKg:"16"},
-        {id:"j_c3", n:"Press de Hombros Sentado con Respaldo", d:"4 × 10-12 · Espalda pegada al respaldo de la silla, sube las mancuernas de 16 kg controlando la bajada en 3 seg", usaKg:true, defKg:"16"},
-        {id:"j_c4", n:"Curl de Bíceps Alterno + Extensión Copa Sentado", d:"3 × 12 + 12 · Biserie de brazos con tus mancuernas de 16 kg sin arquear la espalda", usaKg:true, defKg:"16"},
-        {id:"j_c5", n:"Plancha Abdominal (RKC Plank)", d:"3 × 35-45 seg · Contrae fuerte abdomen, glúteos y cuádriceps simultáneamente", usaKg:false}
+        {id:"j_c1", n:"1. Floor Press en el suelo (Pausa 1s abajo)", d:"12-15 reps · Acostado con rodillas dobladas, tríceps tocan el piso 1s y empujas las mancuernas de 16 kg", usaKg:true, defKg:"16"},
+        {id:"j_c2", n:"2. Remo a un brazo con apoyo en silla", d:"12 reps por lado · Mano y rodilla en silla, jala los 16 kg a la cadera apretando 2s", usaKg:true, defKg:"16"},
+        {id:"j_c3", n:"3. Press de Hombros Sentado con Respaldo", d:"10-12 reps · Espalda pegada al respaldo de la silla, sube controlado", usaKg:true, defKg:"16"},
+        {id:"j_c4", n:"4. Curl de Bíceps + Copa de Tríceps Sentado", d:"12 + 12 reps · Bombeo directo de brazos con mancuerna de 16 kg", usaKg:true, defKg:"16"},
+        {id:"j_c5", n:"5. Plancha Abdominal Firme", d:"35-45 seg · Cierra la vuelta apretando abdomen y glúteos, y toma tus 90s de descanso", usaKg:false}
       ]
     },
     gym: {
       nombre:"Jueves · Pecho, Espalda y Hombro en Gimnasio (6:00 AM)",
-      sub:"Aprovecha la Estación Multifuncional y la Torre de Poleas con soporte dorsal.",
+      sub:"Circuito o biseries en la Estación Multifuncional y Torre de Poleas.",
       ejercicios:[
-        {id:"j_g1", n:"Press de Pecho Sentado en Multifuncional", d:"4 × 12 · Espalda y cadera pegadas al respaldo, empuja controlado y regresa en 3 seg", usaKg:true, defKg:"40"},
-        {id:"j_g2", n:"Jalón al Pecho (Lat Pulldown) en Barra Superior", d:"4 × 12 · Toma la barra ancha, saca el pecho y jala hacia la clavícula sin columpiarte hacia atrás", usaKg:true, defKg:"40"},
-        {id:"j_g3", n:"Mariposa / Pec Deck en Multifuncional", d:"3 × 12-15 · Cierra los brazos al frente apretando el pecho 2 seg con espalda apoyada", usaKg:true, defKg:"30"},
-        {id:"j_g4", n:"Face Pull en Torre de Polea Alta", d:"4 × 15 · Polea a la altura de tu frente, jala hacia las orejas abriendo codos (corrige postura y hombros)", usaKg:true, defKg:"20"},
-        {id:"j_g5", n:"Crunch Abdominal / Pallof en Polea Alta", d:"3 × 15 · Trabajo de abdomen sin despegar ni arquear la zona lumbar", usaKg:true, defKg:"20"}
+        {id:"j_g1", n:"1. Press de Pecho Sentado en Multifuncional", d:"12 reps · Espalda pegada al respaldo, regresa controlado en 3 seg", usaKg:true, defKg:"40"},
+        {id:"j_g2", n:"2. Jalón al Pecho (Lat Pulldown) Barra Superior", d:"12 reps · Saca el pecho y baja hacia la clavícula sin columpiarte", usaKg:true, defKg:"40"},
+        {id:"j_g3", n:"3. Mariposa / Pec Deck en Multifuncional", d:"12-15 reps · Cierra al frente apretando el pecho 2 seg", usaKg:true, defKg:"30"},
+        {id:"j_g4", n:"4. Face Pull en Torre de Polea Alta", d:"15 reps · Jala la cuerda hacia las orejas abriendo codos", usaKg:true, defKg:"20"},
+        {id:"j_g5", n:"5. Crunch / Pallof en Polea", d:"15 reps · Abdomen firme sin arquear la espalda baja", usaKg:true, defKg:"20"}
       ]
     }
   },
   sabado: {
     modoDefault: "gym",
     gym: {
-      nombre:"Sábado · Cuerpo Completo y Cardio Metabólico en Gimnasio",
-      sub:"Sesión estelar en la Multifuncional, Torre de Poleas y Máquina de Remo para desplomar triglicéridos.",
+      nombre:"Sábado · Cuerpo Completo y Remo en Gimnasio",
+      sub:"Sesión metabólica en Multifuncional, Torre de Poleas y Máquina de Remo.",
       ejercicios:[
-        {id:"s_g1", n:"Extensión de Cuádriceps en Multifuncional (Biserie)", d:"4 × 15 · Sube con fuerza, sostén 2 seg arriba y baja en 3 seg; espalda siempre pegada al respaldo", usaKg:true, defKg:"35"},
-        {id:"s_g2", n:"Jalón al Pecho Agarre Cerrado/Neutro", d:"4 × 12 · En la polea alta, baja hasta el pecho alto enfocando dorsales sin hiperextender cintura", usaKg:true, defKg:"45"},
-        {id:"s_g3", n:"Press en Multifuncional o Polea Media Parado", d:"4 × 12 · Un pie adelante y otro atrás para dar estabilidad total a la columna mientras empujas", usaKg:true, defKg:"40"},
-        {id:"s_g4", n:"Remo en Polea Media (De pie o semiarrodillado)", d:"4 × 12 · En la torre ajustable a altura del pecho, torso firme y saca pecho al jalar", usaKg:true, defKg:"35"},
-        {id:"s_g5", n:"Intervalos en Máquina de Remo (Quema-Triglicéridos)", d:"10 min (40s ritmo firme / 20s suave) · Empuja con piernas y mantén la espalda neutra como tabla", usaKg:false}
+        {id:"s_g1", n:"1. Extensión de Cuádriceps en Multifuncional", d:"15 reps · Sostén 2 seg arriba y baja en 3 seg", usaKg:true, defKg:"35"},
+        {id:"s_g2", n:"2. Jalón al Pecho Agarre Cerrado/Neutro", d:"12 reps · Enfoque en dorsales con espalda neutra", usaKg:true, defKg:"45"},
+        {id:"s_g3", n:"3. Press en Multifuncional o Polea Media", d:"12 reps · Estabilidad total de columna", usaKg:true, defKg:"40"},
+        {id:"s_g4", n:"4. Remo en Polea Media", d:"12 reps · Torso firme, saca pecho al jalar", usaKg:true, defKg:"35"},
+        {id:"s_g5", n:"5. Intervalos en Máquina de Remo", d:"10 min (40s ritmo firme / 20s suave) · Empuja con piernas y espalda recta como tabla", usaKg:false}
       ]
     },
     casa: {
-      nombre:"Sábado · Cuerpo Completo en Casa (Mancuernas 16 kg)",
-      sub:"Por si algún sábado no vas al gym: circuito metabólico pesado con tus dos mancuernas de 16 kg.",
+      nombre:"Sábado · Circuito Cuerpo Completo en Casa (16 kg)",
+      sub:"5 estaciones continuas quemadoras de glucosa con tus mancuernas de 16 kg.",
       ejercicios:[
-        {id:"s_c1", n:"Sentadilla Sumo con 1 o 2 Mancuernas de 16 kg", d:"4 × 15 · Compás abierto, baja vertical con la espalda totalmente recta", usaKg:true, defKg:"16"},
-        {id:"s_c2", n:"Step-up en escalón con Mancuernas de 16 kg", d:"3 × 10 por pierna · Sube firme empujando con el talón", usaKg:true, defKg:"16"},
-        {id:"s_c3", n:"Floor Press Neutro + Puente de Glúteo", d:"4 × 12 · Acostado, palmas enfrentadas empujando las 2 mancuernas de 16 kg", usaKg:true, defKg:"16"},
-        {id:"s_c4", n:"Remo con apoyo en silla (16 kg)", d:"4 × 12 por brazo · Pausa de 2 seg arriba en cada repetición", usaKg:true, defKg:"16"},
-        {id:"s_c5", n:"Dead Bug (Escarabajo muerto)", d:"3 × 12 por lado · Espalda baja sellada contra el piso", usaKg:false}
+        {id:"s_c1", n:"1. Sentadilla Sumo con Mancuerna de 16 kg", d:"15 reps · Compás abierto, baja vertical con espalda recta", usaKg:true, defKg:"16"},
+        {id:"s_c2", n:"2. Floor Press Neutro + Puente de Glúteo", d:"12 reps · Acostado, palmas enfrentadas empujando las 2 mancuernas de 16 kg", usaKg:true, defKg:"16"},
+        {id:"s_c3", n:"3. Step-up en escalón con Mancuernas", d:"10 reps por pierna · Sube firme empujando con el talón", usaKg:true, defKg:"16"},
+        {id:"s_c4", n:"4. Remo con apoyo en silla (16 kg)", d:"12 reps por brazo · Pausa de 2 seg arriba", usaKg:true, defKg:"16"},
+        {id:"s_c5", n:"5. Dead Bug (Escarabajo muerto)", d:"12 reps por lado · Espalda baja sellada contra el piso", usaKg:false}
       ]
     }
   },
@@ -525,28 +510,47 @@ const PLAN = {
     modoDefault: "gym",
     gym: {
       nombre:"Domingo · Tracción, Brazos en Polea y Remo en Gimnasio",
-      sub:"Tensión continua en la Torre de Poleas y cierre cardiovascular seguro para espalda.",
+      sub:"Tensión continua en la Torre de Poleas y cierre cardiovascular.",
       ejercicios:[
-        {id:"d_g1", n:"Curl de Bíceps en Torre de Polea Baja", d:"4 × 12-15 · De pie con espalda recta y codos pegados al cuerpo, tensión continua en todo el recorrido", usaKg:true, defKg:"25"},
-        {id:"d_g2", n:"Pushdown de Tríceps en Polea Alta", d:"4 × 12-15 · En la torre alta, extiende los brazos hacia abajo sin mover los codos ni encorvar hombros", usaKg:true, defKg:"25"},
-        {id:"d_g3", n:"Elevaciones Laterales en Polea Baja (Unilateral)", d:"3 × 12 por brazo · Cable desde abajo hacia un lado para trabajar hombro medio sin cargar columna", usaKg:true, defKg:"10"},
-        {id:"d_g4", n:"Pull-Through o Puente de Glúteo + Pallof Press", d:"3 × 15 · Trabajo de cadena posterior y abdomen anti-rotación en la torre de polea", usaKg:true, defKg:"25"},
-        {id:"d_g5", n:"Cierre en Máquina de Remo (Oxidación de Grasas)", d:"10-12 min continuos · Técnica estricta: empuje de piernas + espalda recta, excelente para sensibilidad a la insulina", usaKg:false}
+        {id:"d_g1", n:"1. Curl de Bíceps en Torre de Polea Baja", d:"12-15 reps · Codos pegados al cuerpo", usaKg:true, defKg:"25"},
+        {id:"d_g2", n:"2. Pushdown de Tríceps en Polea Alta", d:"12-15 reps · Extiende codos sin encorvar hombros", usaKg:true, defKg:"25"},
+        {id:"d_g3", n:"3. Elevaciones Laterales en Polea Baja", d:"12 reps por brazo · Hombro medio sin cargar columna", usaKg:true, defKg:"10"},
+        {id:"d_g4", n:"4. Puente de Glúteo + Pallof Press", d:"15 reps · Cadena posterior y abdomen anti-rotación", usaKg:true, defKg:"25"},
+        {id:"d_g5", n:"5. Cierre en Máquina de Remo", d:"10-12 min continuos · Empuje de piernas + espalda recta", usaKg:false}
       ]
     },
     casa: {
-      nombre:"Domingo · Brazos, Hombro y Core en Casa (Mancuernas 16 kg)",
-      sub:"Alternativa en casa con tus mancuernas de 16 kg.",
+      nombre:"Domingo · Circuito Brazos, Postura y Core en Casa (16 kg)",
+      sub:"Circuito dinámico de cierre de semana con mancuernas de 16 kg.",
       ejercicios:[
-        {id:"d_c1", n:"Puente de glúteos con mancuerna de 16 kg (pausa 3s)", d:"4 × 15 · Sostén 3 segundos arriba sin arquear espalda baja", usaKg:true, defKg:"16"},
-        {id:"d_c2", n:"Curl Martillo con Mancuernas de 16 kg", d:"4 × 10-12 · Palmas enfrentadas, espalda apoyada en la pared para cero balanceo", usaKg:true, defKg:"16"},
-        {id:"d_c3", n:"Extensión de Tríceps Copa Sentado (16 kg)", d:"4 × 12-15 · Sentado con respaldo, 1 mancuerna de 16 kg a dos manos detrás de la nuca", usaKg:true, defKg:"16"},
-        {id:"d_c4", n:"Paseo del Granjero Pesado (2 × 16 kg = 32 kg)", d:"4 × 50 seg · Camina erguido sosteniendo ambas mancuernas de 16 kg, abdomen y trapecios firmes", usaKg:true, defKg:"16"},
-        {id:"d_c5", n:"Plancha Lateral", d:"3 × 30 seg por lado · Estabilidad lumbar pura", usaKg:false}
+        {id:"d_c1", n:"1. Puente de glúteos con 16 kg (pausa 3s)", d:"15 reps · Sostén 3 segundos arriba sin arquear lumbar", usaKg:true, defKg:"16"},
+        {id:"d_c2", n:"2. Curl Martillo con Mancuernas de 16 kg", d:"10-12 reps · Palmas enfrentadas, espalda junto a la pared", usaKg:true, defKg:"16"},
+        {id:"d_c3", n:"3. Extensión de Tríceps Copa Sentado (16 kg)", d:"12-15 reps · Sentado con respaldo, 1 mancuerna a dos manos", usaKg:true, defKg:"16"},
+        {id:"d_c4", n:"4. Paseo del Granjero Pesado (2 × 16 kg = 32 kg)", d:"50 seg · Camina erguido sosteniendo ambas mancuernas de 16 kg", usaKg:true, defKg:"16"},
+        {id:"d_c5", n:"5. Plancha Lateral", d:"30 seg por lado · Estabilidad lumbar pura", usaKg:false}
       ]
     }
   }
 };
+
+const SUPER_ITEMS = [
+  {id:"sp1", cat:"Proteínas y Lácteos", t:"Pechuga de pollo sin piel (filetes y para desmenuzar)", c:"1.5 a 1.8 kg"},
+  {id:"sp2", cat:"Proteínas y Lácteos", t:"Carne molida de res magra 90/10 (para picadillo)", c:"600 g"},
+  {id:"sp3", cat:"Proteínas y Lácteos", t:"Huevo (para ti y mezclas cocidas de ella)", c:"18 a 24 pzas"},
+  {id:"sp4", cat:"Proteínas y Lácteos", t:"Claras de huevo líquidas pasteurizadas", c:"1 bote (500g-1kg)"},
+  {id:"sp5", cat:"Proteínas y Lácteos", t:"Atún en agua (solo para ti, cero mariscos)", c:"4 a 5 latas"},
+  {id:"sp6", cat:"Proteínas y Lácteos", t:"Queso Panela (400g) + Queso Oaxaca ligero (250g)", c:"2 paquetes"},
+  {id:"sp7", cat:"Proteínas y Lácteos", t:"Jamón de pechuga de pavo + Yogur griego s/azúcar", c:"250g + 1 bote"},
+  {id:"sp8", cat:"Proteínas y Lácteos", t:"Leche (2-3 L) + 2-3 yogures bebibles para lunch", c:"Semana"},
+  {id:"sp9", cat:"Verduras y Frutas Seguras", t:"Aguacates (3-4 pzas) + Nopales picados (1 bolsa)", c:"Semana"},
+  {id:"sp10", cat:"Verduras y Frutas Seguras", t:"Espinacas, calabacitas (4), zanahorias (4) y pepinos (3)", c:"Semana"},
+  {id:"sp11", cat:"Verduras y Frutas Seguras", t:"Jitomate (1.2 kg), cebolla, ajo, limones y cilantro", c:"Semana"},
+  {id:"sp12", cat:"Verduras y Frutas Seguras", t:"Plátanos (5-6), manzanas (5), fresas y uvas (SIN piña 🚫🍍)", c:"Semana"},
+  {id:"sp13", cat:"Despensa y Carbohidratos", t:"Avena en hojuelas + Semillas de chía (baja triglicéridos)", c:"500g + 150g"},
+  {id:"sp14", cat:"Despensa y Carbohidratos", t:"Lentejas (500g), frijoles (500g) y arroz", c:"Semana"},
+  {id:"sp15", cat:"Despensa y Carbohidratos", t:"Tortillas de maíz (1 kg) + Tortillas de harina (1 paq)", c:"Semana"},
+  {id:"sp16", cat:"Despensa y Carbohidratos", t:"Pan integral + Granola (⚠️ Revisar etiqueta SIN cacahuate)", c:"1 paq c/u"}
+];
 
 const ORDEN_DIAS = ["martes","jueves","sabado","domingo"];
 const ETIQUETAS = {martes:"Mar", jueves:"Jue", sabado:"Sáb", domingo:"Dom"};
@@ -561,7 +565,7 @@ const HABITOS_LISTA = [
 ];
 
 const LABS_BASE = [
-  {key:"trig", n:"Triglicéridos", ini:563, meta:"< 150", u:"mg/dL", estado:"crit", nota:"Muy alto en lab inicial (03/11/2026). Baja rápido al quitar harinas/maltodextrina y sumar remo/fuerza."},
+  {key:"trig", n:"Triglicéridos", ini:563, meta:"< 150", u:"mg/dL", estado:"crit", nota:"Muy alto en lab inicial (03/11/2026). Baja rápido al quitar harinas/maltodextrina y entrenar en circuito."},
   {key:"gluc", n:"Glucosa en ayuno", ini:102, meta:"70 - 95", u:"mg/dL", estado:"warn", nota:"Ligeramente elevada (102). Mejora con fuerza, buen sueño y caminata post-comida."},
   {key:"urico", n:"Ácido Úrico", ini:7.2, meta:"< 6.0", u:"mg/dL", estado:"warn", nota:"En el límite superior (7.2). Requiere 2.5 L de agua diarios y cero fructosa/refrescos."},
   {key:"col", n:"Colesterol Total", ini:183, meta:"< 190", u:"mg/dL", estado:"ok", nota:"En rango normal (<200 mg/dL). Mantener con aguacate, chía y fibra."},
@@ -573,22 +577,21 @@ const COMIDAS = [
     { n:"Bowl de Avena Metabólica con Chía y Canela 🥣", empate:true,
       ing:"½ taza de avena en hojuelas, 1 cda de chía, canela, agua o leche descremada/almendra, ½ manzana o 5 fresas picadas (+ 3 claras o 2 huevos cocidos aparte para ti).",
       pasos:[
-        "Hierve la avena con agua/leche y canela por 5 min e incorpora la cucharada de chía (su fibra soluble atrapa colesterol y triglicéridos).",
+        "Hierve la avena con agua/leche y canela por 5 min e incorpora la cucharada de chía.",
         "Sirve una porción para ti y otra para tu hija con fruta picada encima.",
-        "Para ti: acompaña con 2 huevos revueltos con espinaca o jitomate para completar 30g de proteína."
+        "Para ti: acompaña con 2 huevos revueltos con espinaca o jitomate."
       ]},
     { n:"Omelette o Huevos a la Mexicana con Nopales 🍳", empate:false,
       ing:"2 huevos enteros + 2 claras, 1 taza de nopales cocidos o espinacas, jitomate, cebolla, ¼ de aguacate y 2 tortillas de maíz.",
       pasos:[
         "Saltea los nopales, cebolla y jitomate con mínimo aceite en spray.",
-        "Agrega los huevos batidos con las claras hasta cuajar.",
-        "Acompaña con aguacate y máximo 2 tortillas de maíz (para los días que desayunas solo)."
+        "Agrega los huevos batidos con las claras hasta cuajar y acompaña con máximo 2 tortillas de maíz."
       ]},
     { n:"Hot Cakes Proteicos de Avena (Fin de Semana) 🥞", empate:true,
       ing:"1 taza de avena licuada, 1 plátano maduro, 1 huevo (integrado en la masa cocida, seguro para ella), leche, canela.",
       pasos:[
-        "Licúa todos los ingredientes y cocina los hot cakes en sartén antiadherente.",
-        "El huevo va 100% cocinado dentro de la mezcla. Para ti: acompaña con yogur griego natural sin azúcar encima en lugar de miel."
+        "Licúa todos los ingredientes y cocina en sartén antiadherente.",
+        "El huevo va 100% cocinado dentro de la mezcla. Para ti: acompaña con yogur griego natural sin azúcar."
       ]}
   ]},
   { tipo:"Comidas Fuertes (Misma Base para Ambos 👨‍👧)", items:[
@@ -596,35 +599,30 @@ const COMIDAS = [
       ing:"180g de pechuga de pollo en tiras (para ti) + 90g (para ella), pimientos/calabacitas, ½ taza de arroz cocido y frijoles de la olla.",
       pasos:[
         "Asa las tiras de pechuga con ajo, cebolla y calabacita o pimiento en julianas.",
-        "Sirve ambos platos con una porción medida de arroz (½ taza para ti) y frijoles de la olla.",
-        "Agrega ¼ de aguacate y ensalada fresca a tu plato."
+        "Sirve ambos platos con arroz medido (½ taza para ti), frijoles y aguacate."
       ]},
     { n:"Picadillo de Res Magra (90/10) con Verduras 🍲", empate:true,
-      ing:"Carne molida magra de res, calabacita, zanahoria y chayote en cubitos pequeños, puré de jitomate natural, ajo y cebolla.",
+      ing:"Carne molida magra de res, calabacita, zanahoria y chayote en cubitos, puré de jitomate natural, ajo y cebolla.",
       pasos:[
-        "Dora la carne magra en su propio jugo con ajo y cebolla; escurre cualquier exceso de grasa.",
-        "Agrega mucha verdura picada (calabacita y zanahoria) y jitomate licuado; cocina 15 min.",
-        "Rinde para 2-3 días y les encanta a los niños. Acompaña con 2 tortillas de maíz."
+        "Dora la carne magra con ajo y cebolla; agrega la verdura picada y jitomate licuado por 15 min.",
+        "Rinde para 2-3 días. Acompaña con máximo 2 tortillas de maíz."
       ]},
     { n:"Bowl de Lentejas con Pollo Desmenuzado y Queso Panela 🥗", empate:true,
       ing:"1 taza de lentejas cocidas en caldo de jitomate, 120g de pollo desmenuzado, cubitos de queso panela y aguacate.",
       pasos:[
-        "Calienta las lentejas guisadas con jitomate, cebolla y cilantro.",
-        "Agrega encima el pollo desmenuzado y cubitos de queso panela (a tu hija se las puedes licuar tipo crema con queso si prefiere esa textura)."
+        "Calienta las lentejas guisadas y sirve con el pollo desmenuzado y queso panela encima."
       ]}
   ]},
   { tipo:"Cenas Ligeras (Bajas en Carbohidrato Nocturno)", items:[
     { n:"Tacos o Sincronizadas de Pollo/Queso Panela en Maíz 🌮", empate:true,
-      ing:"2 tortillas de maíz (para ti), pollo desmenuzado o jamón de pechuga de pavo, queso panela o Oaxaca ligero, pico de gallo.",
+      ing:"2 tortillas de maíz (para ti), pollo desmenuzado o jamón de pavo, queso panela o Oaxaca ligero, pico de gallo.",
       pasos:[
-        "Arma las quesadillas con pollo desmenuzado y queso hasta gratinar en el comal sin grasa.",
-        "Cenando lo mismo en 8 minutos. Para ti: suma pepino o lechuga con limón al lado."
+        "Arma las quesadillas con pollo desmenuzado y queso hasta gratinar en el comal sin grasa."
       ]},
     { n:"Ensalada Fresca de Atún con Aguacate (Solo para ti) 🐟", empate:false,
-      ing:"2 latas de atún en agua (escurridas), ½ aguacate, jitomate, pepino, cebolla morada, limón y 1 paquete de tostadas horneadas (Saníssimo).",
+      ing:"2 latas de atún en agua (escurridas), ½ aguacate, jitomate, pepino, cebolla morada, limón y tostadas horneadas.",
       pasos:[
-        "Mezcla el atún en agua con el pepino, jitomate y aguacate en cubos, limón y pimienta.",
-        "Excelente aporte de proteína magra y Omega-3 para desplomar triglicéridos en la noche."
+        "Mezcla el atún en agua con pepino, jitomate, aguacate y limón."
       ]}
   ]}
 ];
@@ -642,18 +640,17 @@ const MENU_HIJA = [
     { t:"Desayuno", n:"Hot cakes de avena y plátano 🥞", juntos:true,
       d:"Hechos con avena licuada, leche y plátano (el huevo va cocinado en la mezcla, 100% seguro para ella).",
       alt:[
-        { n:"Quesadilla con licuado de plátano", d:"1 quesadilla al comal + vaso de leche licuada con plátano y canela." },
-        { n:"Yogur con fresas y granola segura", d:"Revisa siempre que la granola sea libre de cacahuate y trazas." }
+        { n:"Quesadilla con licuado de plátano", d:"1 quesadilla al comal + vaso de leche licuada con plátano y canela." }
       ]},
     { t:"Lunch escolar", n:"Rollitos de jamón de pavo y queso + fruta 🥪",
-      d:"Pan integral o tortilla de harina enrollada con jamón y queso, cortada en espirales + uvas o manzana en gajos + agua.",
+      d:"Pan integral o tortilla de harina enrollada con jamón y queso + uvas o manzana en gajos + agua.",
       alt:[
         { n:"Mini quesadillas + pepino con limón", d:"2 quesadillas chicas + bastones de pepino y uvas." }
       ]}
   ]},
   { dia:"Jueves", comidas:[
     { t:"Cena (Empatada)", n:"Espagueti rojo con fajitas de pollo 🍝", juntos:true,
-      d:"Pasta con salsa de jitomate natural y tiras de pechuga de pollo con queso. Tú comes mayor proporción de pollo y verdura, y menos pasta.",
+      d:"Pasta con salsa de jitomate natural y tiras de pechuga de pollo con queso.",
       alt:[
         { n:"Molletes en bolillo o pan integral", d:"Con frijoles machacados y queso gratinado al sartén tapado." }
       ]}
@@ -670,7 +667,7 @@ const MENU_HIJA = [
         { n:"Sándwich de queso panela/manchego y jamón", d:"Con jitomate y un yogur bebible." }
       ]},
     { t:"Cena (Empatada)", n:"Molletes caseros con pico de gallo 🍞", juntos:true,
-      d:"Pan integral o medio bolillo con frijoles y queso gratinado. Rápido, económico y nutritivo.",
+      d:"Pan integral o medio bolillo con frijoles y queso gratinado.",
       alt:[
         { n:"Tacos suaves de frijol con queso", d:"Tortilla de maíz suavecita rellena de frijoles y queso fresco." }
       ]}
@@ -699,14 +696,13 @@ const MENU_HIJA = [
         { n:"Molletes dulces con mermelada", d:"Pan tostado con mantequilla de vaca y mermelada." }
       ]},
     { t:"Comida (Empatada)", n:"Lentejas con arroz y pollo 🍲", juntos:true,
-      d:"Ricas en hierro y fibra soluble. Si prefiere textura lisa, licúa su porción como crema de lentejas con cubitos de queso.",
+      d:"Ricas en hierro y fibra soluble.",
       alt:[
         { n:"Caldo de pollo con verduras y arroz", d:"Pechuga desmenuzada, zanahoria, calabacita y arroz." }
       ]}
   ]}
 ];
 
-/* ================= ALMACENAMIENTO Y ESTADO ================= */
 const KEY = "new-life-90-datos-v2";
 const KEY_LEGACY = "entrena-app-datos";
 
@@ -717,11 +713,13 @@ let estado = {
   sesiones: [],
   ultimosPesosEj: {},
   habitosPorDia: {},
+  superCheck: {},
   labsNuevos: {}
 };
 
 let diaActivo = "martes";
 let sesionActual = {};
+let vueltasCompletadas = 0;
 
 function hoyISO(){
   const d = new Date();
@@ -761,6 +759,7 @@ function cargarDatos(){
       if (!estado.modosPorDia) {
         estado.modosPorDia = { martes:"casa", jueves:"casa", sabado:"gym", domingo:"gym" };
       }
+      if (!estado.superCheck) estado.superCheck = {};
       return;
     }
     const v1 = localStorage.getItem(KEY_LEGACY);
@@ -779,7 +778,6 @@ function guardarDatos(){
   } catch(e){}
 }
 
-/* ================= CUENTA REGRESIVA 90 DÍAS ================= */
 function actualizarContadorReto(){
   const [y,m,d] = FECHA_INICIO_RETO.split("-").map(Number);
   const ini = new Date(y, m-1, d);
@@ -789,7 +787,6 @@ function actualizarContadorReto(){
   document.getElementById("diasRestantes").textContent = "Día " + diffDias + " / 90";
 }
 
-/* ================= HÁBITOS DIARIOS ================= */
 function pintarHabitos(){
   const cont = document.getElementById("listaHabitos");
   const hoy = hoyISO();
@@ -812,7 +809,6 @@ function pintarHabitos(){
   });
 }
 
-/* ================= PANTALLA: ENTRENAR ================= */
 function pintarSelectorFases(){
   const cont = document.getElementById("selectorFases");
   cont.innerHTML = "";
@@ -830,6 +826,7 @@ function pintarSelectorFases(){
         estado.modosPorDia.martes = "casa";
         estado.modosPorDia.jueves = "casa";
       }
+      vueltasCompletadas = 0;
       guardarDatos();
       pintarSelectorFases();
       pintarSelectorDias();
@@ -850,10 +847,11 @@ function pintarSelectorDias(){
     b.innerHTML =
       '<div class="d">'+ETIQUETAS[k]+'</div>'+
       '<div class="n">'+ICONO_DIA[k]+'</div>'+
-      '<span class="m-tag">'+(m==="gym" ? "🏢 Gym" : "🏠 16kg")+'</span>';
+      '<span class="m-tag">'+(m==="gym" ? "🏢 Gym" : "🏠 Circuito")+'</span>';
     b.onclick = ()=>{
       diaActivo = k;
       sesionActual = {};
+      vueltasCompletadas = 0;
       pintarSelectorDias();
       pintarSelectorModo();
       pintarEjercicios();
@@ -869,6 +867,7 @@ function pintarSelectorModo(){
     btn.onclick = ()=>{
       estado.modosPorDia[diaActivo] = btn.dataset.modo;
       sesionActual = {};
+      vueltasCompletadas = 0;
       guardarDatos();
       pintarSelectorDias();
       pintarSelectorModo();
@@ -882,11 +881,67 @@ function planDelDiaActivo(){
   return PLAN[diaActivo][m];
 }
 
+function pintarVueltasCircuito(){
+  const metaVueltas = (FASES[estado.fase || 1].vueltas) || 4;
+  document.getElementById("lblVueltas").textContent = "🔄 Vueltas del Circuito (" + vueltasCompletadas + " / " + metaVueltas + ")";
+  const cont = document.getElementById("ContenedorPillsVueltas");
+  cont.innerHTML = "";
+  for (let i = 1; i <= metaVueltas; i++){
+    const p = document.createElement("div");
+    p.className = "v-pill" + (i <= vueltasCompletadas ? " hecha" : "");
+    p.textContent = i;
+    p.onclick = ()=>{
+      vueltasCompletadas = (vueltasCompletadas === i) ? i - 1 : i;
+      if (vueltasCompletadas >= metaVueltas){
+        marcarTodosEjercicios(true);
+      }
+      pintarVueltasCircuito();
+      pintarEjercicios();
+    };
+    cont.appendChild(p);
+  }
+}
+
+function marcarTodosEjercicios(estadoDone){
+  const plan = planDelDiaActivo();
+  plan.ejercicios.forEach(ej=>{
+    const prevKg = (estado.ultimosPesosEj && estado.ultimosPesosEj[ej.id]) ? estado.ultimosPesosEj[ej.id] : (ej.defKg || "");
+    const s = sesionActual[ej.id] || {done:false, kg: prevKg};
+    s.done = estadoDone;
+    sesionActual[ej.id] = s;
+  });
+}
+
+document.getElementById("btnCompletarVuelta").onclick = ()=>{
+  const metaVueltas = (FASES[estado.fase || 1].vueltas) || 4;
+  if (vueltasCompletadas < metaVueltas) {
+    vueltasCompletadas++;
+  }
+  if (vueltasCompletadas >= metaVueltas) {
+    marcarTodosEjercicios(true);
+  } else {
+    // Al menos marca el primer ejercicio para habilitar guardado si hace falta
+    const plan = planDelDiaActivo();
+    if (plan.ejercicios.length > 0){
+      const id0 = plan.ejercicios[0].id;
+      const s0 = sesionActual[id0] || {done:false, kg: plan.ejercicios[0].defKg || ""};
+      s0.done = true;
+      sesionActual[id0] = s0;
+    }
+  }
+  pintarVueltasCircuito();
+  pintarEjercicios();
+  iniciarTimer(90);
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+
 function pintarEjercicios(){
   const plan = planDelDiaActivo();
   const faseInfo = FASES[estado.fase || 1];
   document.getElementById("tituloDia").textContent = plan.nombre;
   document.getElementById("subDia").innerHTML = '<strong>'+faseInfo.nombre+':</strong> '+faseInfo.nota+'<br>'+plan.sub;
+  pintarVueltasCircuito();
+
   const cont = document.getElementById("listaEjercicios");
   cont.innerHTML = "";
 
@@ -905,7 +960,7 @@ function pintarEjercicios(){
             '<input type="number" inputmode="decimal" step="0.5" placeholder="16" value="'+(est.kg||"")+'" aria-label="Peso en kg para '+ej.n+'">'+
             '<span>kg</span>'+
           '</div>'+
-          (prevKg ? '<span class="ult-peso">Referencia: '+prevKg+' kg</span>' : '')+
+          (prevKg ? '<span class="ult-peso">Ref: '+prevKg+' kg</span>' : '')+
         '</div>';
     }
 
@@ -952,13 +1007,18 @@ function actualizarBarra(){
   const plan = planDelDiaActivo();
   const total = plan.ejercicios.length;
   const hechos = plan.ejercicios.filter(e=> sesionActual[e.id] && sesionActual[e.id].done).length;
-  document.getElementById("barraSesion").style.width = Math.round(hechos/total*100)+"%";
-  document.getElementById("btnGuardarSesion").disabled = hechos === 0;
+  const metaVueltas = (FASES[estado.fase || 1].vueltas) || 4;
+  const pctEj = Math.round(hechos/total*100);
+  const pctVueltas = Math.round(vueltasCompletadas/metaVueltas*100);
+  const pct = Math.max(pctEj, pctVueltas);
+  document.getElementById("barraSesion").style.width = pct+"%";
+  document.getElementById("btnGuardarSesion").disabled = (hechos === 0 && vueltasCompletadas === 0);
 }
 
 document.getElementById("btnGuardarSesion").onclick = ()=>{
   const plan = planDelDiaActivo();
-  const hechos = plan.ejercicios.filter(e=> sesionActual[e.id] && sesionActual[e.id].done).length;
+  let hechos = plan.ejercicios.filter(e=> sesionActual[e.id] && sesionActual[e.id].done).length;
+  if (hechos === 0 && vueltasCompletadas > 0) hechos = plan.ejercicios.length;
   if (hechos === 0) return;
   Object.keys(sesionActual).forEach(id=>{
     if (sesionActual[id].kg) estado.ultimosPesosEj[id] = sesionActual[id].kg;
@@ -968,11 +1028,13 @@ document.getElementById("btnGuardarSesion").onclick = ()=>{
     dia: diaActivo,
     modo: modoActual(),
     fase: estado.fase,
+    vueltas: vueltasCompletadas,
     hechos,
     total: plan.ejercicios.length,
     ejercicios: JSON.parse(JSON.stringify(sesionActual))
   });
   sesionActual = {};
+  vueltasCompletadas = 0;
   guardarDatos();
   pintarEjercicios();
   pintarProgreso();
@@ -982,7 +1044,35 @@ document.getElementById("btnGuardarSesion").onclick = ()=>{
   window.scrollTo({top:0, behavior:"smooth"});
 };
 
-/* ================= PANTALLA: SALUD / LABS ================= */
+/* ================= LISTA DE SÚPER INTERACTIVA ================= */
+function pintarSuper(){
+  const cont = document.getElementById("listaSuperInteractiva");
+  if (!cont) return;
+  cont.innerHTML = "";
+  SUPER_ITEMS.forEach(item=>{
+    const hecho = !!(estado.superCheck && estado.superCheck[item.id]);
+    const div = document.createElement("div");
+    div.className = "habito" + (hecho ? " hecho" : "");
+    div.innerHTML =
+      '<div class="check" role="checkbox" aria-checked="'+hecho+'">✓</div>'+
+      '<div class="h-txt">'+item.t+'<span class="h-sub">'+item.cat+' · <strong>'+item.c+'</strong></span></div>';
+    div.onclick = ()=>{
+      if (!estado.superCheck) estado.superCheck = {};
+      estado.superCheck[item.id] = !hecho;
+      guardarDatos();
+      pintarSuper();
+    };
+    cont.appendChild(div);
+  });
+}
+
+document.getElementById("btnResetSuper").onclick = ()=>{
+  estado.superCheck = {};
+  guardarDatos();
+  pintarSuper();
+};
+
+/* ================= SALUD / LABS ================= */
 function pintarLabs(){
   const cont = document.getElementById("listaLabs");
   cont.innerHTML = "";
@@ -1017,7 +1107,6 @@ document.getElementById("btnGuardarLab").onclick = ()=>{
   pintarLabs();
 };
 
-/* ================= PANTALLA: COMIDAS ================= */
 function pintarComidas(){
   const cont = document.getElementById("listaComidas");
   cont.innerHTML = "";
@@ -1038,7 +1127,6 @@ function pintarComidas(){
   });
 }
 
-/* ================= PANTALLA: MI HIJA ================= */
 function pintarHija(){
   const cont = document.getElementById("listaHija");
   cont.innerHTML = "";
@@ -1070,7 +1158,6 @@ function pintarHija(){
   });
 }
 
-/* ================= PANTALLA: PESO E IMC ================= */
 document.getElementById("btnPeso").onclick = ()=>{
   const inpP = document.getElementById("inputPeso");
   const inpC = document.getElementById("inputCintura");
@@ -1168,7 +1255,6 @@ function pintarGrafica(){
     '</svg>';
 }
 
-/* ================= PANTALLA: PROGRESO Y RACHA ================= */
 function inicioSemana(d){
   const dt = new Date(d);
   const dow = (dt.getDay()+6)%7;
@@ -1224,15 +1310,15 @@ function pintarProgreso(){
   ultimas.forEach(s=>{
     const fila = document.createElement("div");
     fila.className = "hist-item";
-    const mTag = s.modo === "gym" ? "🏢 Gym" : "🏠 Casa 16kg";
+    const mTag = s.modo === "gym" ? "🏢 Gym" : "🏠 Circuito 16kg";
+    const vTxt = s.vueltas ? " · " + s.vueltas + " vueltas" : "";
     fila.innerHTML =
-      '<span>'+(ICONO_DIA[s.dia]||"🏋️")+' <strong>'+ETIQUETAS[s.dia]+' · '+mTag+'</strong> <span style="font-size:11.5px;color:var(--ink-soft)">(Mes '+(s.fase||1)+')</span><br><span class="fecha-h">'+fmtFecha(s.fecha)+'</span></span>'+
+      '<span>'+(ICONO_DIA[s.dia]||"🏋️")+' <strong>'+ETIQUETAS[s.dia]+' · '+mTag+'</strong> <span style="font-size:11.5px;color:var(--ink-soft)">(Mes '+(s.fase||1)+vTxt+')</span><br><span class="fecha-h">'+fmtFecha(s.fecha)+'</span></span>'+
       '<span style="font-weight:800;color:var(--green)">'+s.hechos+'/'+s.total+' ✓</span>';
     h.appendChild(fila);
   });
 }
 
-/* ================= EXPORTAR / IMPORTAR RESPALDO JSON ================= */
 document.getElementById("btnExportar").onclick = ()=>{
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(estado, null, 2));
   const a = document.createElement("a");
@@ -1262,10 +1348,11 @@ document.getElementById("inputImportFile").onchange = (e)=>{
         pintarSelectorModo();
         pintarEjercicios();
         pintarHabitos();
+        pintarSuper();
         pintarLabs();
         pintarPeso();
         pintarProgreso();
-        alert("✓ Datos importados correctamente en este dispositivo.");
+        alert("✓ Datos importados correctamente.");
       }
     } catch(err){
       alert("No se pudo leer el archivo JSON.");
@@ -1274,7 +1361,21 @@ document.getElementById("inputImportFile").onchange = (e)=>{
   reader.readAsText(file);
 };
 
-/* ================= CRONÓMETRO DE DESCANSO ================= */
+/* Botón para actualizar desde GitHub sin quedarse en caché vieja */
+document.getElementById("btnForzarUpdate").onclick = async ()=>{
+  try {
+    if ("serviceWorker" in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) await r.unregister();
+    }
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      for (const k of keys) await caches.delete(k);
+    }
+  } catch(e){}
+  window.location.reload(true);
+};
+
 let timerInt = null, timerFin = 0, audioCtx = null;
 const timerDisplay = document.getElementById("timerDisplay");
 
@@ -1317,7 +1418,7 @@ function iniciarTimer(seg){
     if (resta <= 0){
       clearInterval(timerInt); timerInt = null;
       timerDisplay.classList.add("listo");
-      timerDisplay.textContent = "¡Siguiente serie! 💥";
+      timerDisplay.textContent = "¡Siguiente vuelta! 💥";
       sonarAlarma();
       return;
     }
@@ -1334,11 +1435,10 @@ document.getElementById("btnTimerStop").onclick = ()=>{
   timerDisplay.textContent = "Listo para darlo todo";
 };
 
-/* ================= NAVEGACIÓN ================= */
 const TITULOS = {
   "p-entrenar":"Hoy toca entrenar",
   "p-salud":"Salud, Labs y Horario 6 AM",
-  "p-comidas":"Nutrición Anti-Triglicéridos",
+  "p-comidas":"Nutrición y Carrito Semanal",
   "p-hija":"El menú de tu peque",
   "p-peso":"Peso, IMC y Cintura",
   "p-progreso":"Tu progreso (90 Días)"
@@ -1355,7 +1455,6 @@ document.querySelectorAll("nav button").forEach(b=>{
   };
 });
 
-/* ================= INICIO Y SERVICE WORKER ================= */
 (function init(){
   const d = new Date();
   document.getElementById("fechaHoy").textContent = d.toLocaleDateString("es-MX",{weekday:"long", day:"numeric", month:"long"});
@@ -1367,6 +1466,7 @@ document.querySelectorAll("nav button").forEach(b=>{
   pintarSelectorDias();
   pintarSelectorModo();
   pintarEjercicios();
+  pintarSuper();
   pintarLabs();
   pintarComidas();
   pintarHija();
