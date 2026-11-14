@@ -200,7 +200,7 @@
 <div class="wrap">
   <header>
     <div>
-      <div class="kicker">Plan Híbrido 90d · Circuito 16kg + Gym</div>
+      <div class="kicker">Plan Híbrido 90d · Circuito 7kg×2 + Gym</div>
       <h1 id="titulo">Hoy toca entrenar</h1>
       <div class="fecha" id="fechaHoy"></div>
     </div>
@@ -238,7 +238,7 @@
       <div class="fases" id="selectorFases"></div>
       <div class="dias" id="selectorDias"></div>
       <div class="modo-switch" id="selectorModo">
-        <button class="modo-btn" data-modo="casa">🏠 En Casa (Circuito 16 kg)</button>
+        <button class="modo-btn" data-modo="casa">🏠 En Casa (Circuito 2×7 kg)</button>
         <button class="modo-btn" data-modo="gym">🏢 En Gimnasio (Poleas/Máquinas)</button>
       </div>
     </div>
@@ -275,7 +275,7 @@
     <div class="card">
       <span class="tag">⏰ Plan de Transición a las 6:00 AM (Sin subir cortisol)</span>
       <div style="font-size:13.4px;color:var(--ink-soft)">
-        • <strong style="color:var(--ink)">Semanas 1 y 2 (6:40 AM):</strong> Martes y jueves haces tu circuito dinámico de 25 min en casa con mancuernas de 16 kg; sábado y domingo vas al gimnasio.<br>
+        • <strong style="color:var(--ink)">Semanas 1 y 2 (6:40 AM):</strong> Martes y jueves haces tu circuito dinámico de 25 min en casa con mancuernas de 7 kg; sábado y domingo vas al gimnasio.<br>
         • <strong style="color:var(--ink)">Semanas 3 y 4 (6:20 AM):</strong> Deja ropa y agua listas la noche anterior. Cena ligero antes de las 9:00 PM.<br>
         • <strong style="color:var(--ink)">Mes 2 y 3 (6:00 AM fijo):</strong> Ya adaptado, cambia el interruptor de Martes y Jueves a <strong>🏢 Modo Gimnasio</strong> antes de irte al hospital.
       </div>
@@ -434,38 +434,38 @@ const PLAN = {
   martes: {
     modoDefault: "casa",
     casa: {
-      nombre:"Martes · Circuito Pierna y Core (Mancuernas 16 kg)",
+      nombre:"Martes · Circuito Pierna y Core (2 Mancuernas de 7 kg)",
       sub:"Orden intercalado para hacerlo en circuito continuo: pasas del 1 al 5 (15s para cambiar) y descansas 90s al cerrar la vuelta.",
       ejercicios:[
-        {id:"m_c1", n:"1. Sentadilla Goblet con Pausa (Tempo 3-2-1)", d:"12 a 15 reps · Mancuerna de 16 kg al pecho, baja en 3s, pausa 2s rozando la silla y sube", usaKg:true, defKg:"16"},
+        {id:"m_c1", n:"1. Sentadilla con 2 Mancuernas (14 kg total)", d:"15 a 20 reps · Sostén las 2 mancuernas de 7 kg en los hombros o a los lados, baja en 3s rozando la silla y sube", usaKg:true, defKg:"14"},
         {id:"m_c2", n:"2. Bird Dog controlado (Recuperación activa)", d:"10 reps por lado · En 4 puntos, estira brazo y pierna contraria 2s sin arquear cintura", usaKg:false},
-        {id:"m_c3", n:"3. Hip Thrust en sofá con mancuerna (Pausa 3s)", d:"15 reps · Espalda alta en sofá, mancuerna de 16 kg en cadera, aprieta glúteo 3s arriba", usaKg:true, defKg:"16"},
-        {id:"m_c4", n:"4. Elevación de talones a 1 pierna", d:"15 reps por lado · Sostén 16 kg mientras tus muslos recuperan aliento", usaKg:true, defKg:"16"},
-        {id:"m_c5", n:"5. Split Squat / Sentadilla Búlgara", d:"10 reps por pierna · Cierra fuerte la vuelta bajando vertical con espalda neutra", usaKg:true, defKg:"16"}
+        {id:"m_c3", n:"3. Hip Thrust en sofá (con las 2 mancuernas = 14 kg)", d:"15 a 20 reps · Espalda alta en sofá, coloca las 2 mancuernas de 7 kg sobre la cadera y aprieta glúteo 3s arriba", usaKg:true, defKg:"14"},
+        {id:"m_c4", n:"4. Elevación de talones (2 mancuernas o a 1 pierna)", d:"20 reps · Sostén tus mancuernas de 7 kg, pausa 2s arriba mientras tus muslos recuperan aliento", usaKg:true, defKg:"7"},
+        {id:"m_c5", n:"5. Split Squat / Desplante estático (2 × 7 kg)", d:"12 a 15 reps por pierna · 1 mancuerna de 7 kg en cada mano (14 kg total), baja vertical con espalda neutra", usaKg:true, defKg:"14"}
       ]
     },
     gym: {
       nombre:"Martes · Pierna y Core en Gimnasio (6:00 AM)",
-      sub:"Enfocado en la Estación Multifuncional, Torre de Poleas y Remo sin comprimir la columna.",
+      sub:"Enfocado en la Estación Multifuncional, Polea Ajustable, Banco Plano y Bicicleta Spinning.",
       ejercicios:[
         {id:"m_g1", n:"1. Extensión de Cuádriceps en Multifuncional", d:"12-15 reps · Espalda pegada al respaldo, sostén 2 seg arriba antes de bajar lento", usaKg:true, defKg:"35"},
         {id:"m_g2", n:"2. Pallof Press en Polea Media (Anti-rotación)", d:"12 reps por lado · Extiende brazos al frente resistiendo el giro del cable", usaKg:true, defKg:"15"},
-        {id:"m_g3", n:"3. Sentadilla Búlgara o Goblet con Mancuerna", d:"10 reps por pierna · Torso erguido, rodilla alineada", usaKg:true, defKg:"16"},
+        {id:"m_g3", n:"3. Sentadilla Búlgara o Goblet con Mancuerna", d:"10 reps por pierna · Torso erguido, rodilla alineada", usaKg:true, defKg:"7"},
         {id:"m_g4", n:"4. Abducción y Patada de Glúteo en Polea Baja", d:"15 reps por pierna · En la torre de polea baja, torso firme", usaKg:true, defKg:"15"},
-        {id:"m_g5", n:"5. Remo Metabólico en Máquina (Espalda Neutra)", d:"8 min al final · Empuja con piernas manteniendo espalda 100% recta", usaKg:false}
+        {id:"m_g5", n:"5. Bicicleta Spinning a Ritmo Constante 🚴", d:"8-10 min al final · Ajusta el manubrio alto para mantener la espalda recta y pedalea con resistencia moderada", usaKg:false}
       ]
     }
   },
   jueves: {
     modoDefault: "casa",
     casa: {
-      nombre:"Jueves · Circuito Tren Superior + Core (Mancuernas 16 kg)",
+      nombre:"Jueves · Circuito Tren Superior + Core (2 Mancuernas de 7 kg)",
       sub:"Empuje + Tracción + Hombro + Brazos + Abdomen corrido sin tiempos muertos.",
       ejercicios:[
-        {id:"j_c1", n:"1. Floor Press en el suelo (Pausa 1s abajo)", d:"12-15 reps · Acostado con rodillas dobladas, tríceps tocan el piso 1s y empujas las mancuernas de 16 kg", usaKg:true, defKg:"16"},
-        {id:"j_c2", n:"2. Remo a un brazo con apoyo en silla", d:"12 reps por lado · Mano y rodilla en silla, jala los 16 kg a la cadera apretando 2s", usaKg:true, defKg:"16"},
-        {id:"j_c3", n:"3. Press de Hombros Sentado con Respaldo", d:"10-12 reps · Espalda pegada al respaldo de la silla, sube controlado", usaKg:true, defKg:"16"},
-        {id:"j_c4", n:"4. Curl de Bíceps + Copa de Tríceps Sentado", d:"12 + 12 reps · Bombeo directo de brazos con mancuerna de 16 kg", usaKg:true, defKg:"16"},
+        {id:"j_c1", n:"1. Floor Press en el suelo + Flexiones inclinadas", d:"15-20 reps con mancuernas de 7 kg (pausa 1s abajo) · Controla el movimiento apretando el pecho arriba", usaKg:true, defKg:"7"},
+        {id:"j_c2", n:"2. Remo con apoyo en silla (1 de 7 kg o las 2 juntas)", d:"15 reps por lado · Mano y rodilla en silla, jala hacia la cadera y sostén 2s arriba apretando espalda", usaKg:true, defKg:"7"},
+        {id:"j_c3", n:"3. Press de Hombros Sentado con Respaldo (7 kg c/u)", d:"12-15 reps · Espalda pegada al respaldo de la silla, sube las mancuernas de 7 kg sin arquear cintura", usaKg:true, defKg:"7"},
+        {id:"j_c4", n:"4. Curl de Bíceps + Extensión de Tríceps Sentado", d:"15 + 15 reps · Bombeo continuo de brazos con tus mancuernas de 7 kg", usaKg:true, defKg:"7"},
         {id:"j_c5", n:"5. Plancha Abdominal Firme", d:"35-45 seg · Cierra la vuelta apretando abdomen y glúteos, y toma tus 90s de descanso", usaKg:false}
       ]
     },
@@ -484,24 +484,24 @@ const PLAN = {
   sabado: {
     modoDefault: "gym",
     gym: {
-      nombre:"Sábado · Cuerpo Completo y Remo en Gimnasio",
-      sub:"Sesión metabólica en Multifuncional, Torre de Poleas y Máquina de Remo.",
+      nombre:"Sábado · Cuerpo Completo y Bicicleta en Gimnasio",
+      sub:"Sesión metabólica en la Máquina Multifuncional, Banco Plano con Mancuernas y Bicicleta Spinning.",
       ejercicios:[
         {id:"s_g1", n:"1. Extensión de Cuádriceps en Multifuncional", d:"15 reps · Sostén 2 seg arriba y baja en 3 seg", usaKg:true, defKg:"35"},
         {id:"s_g2", n:"2. Jalón al Pecho Agarre Cerrado/Neutro", d:"12 reps · Enfoque en dorsales con espalda neutra", usaKg:true, defKg:"45"},
-        {id:"s_g3", n:"3. Press en Multifuncional o Polea Media", d:"12 reps · Estabilidad total de columna", usaKg:true, defKg:"40"},
-        {id:"s_g4", n:"4. Remo en Polea Media", d:"12 reps · Torso firme, saca pecho al jalar", usaKg:true, defKg:"35"},
-        {id:"s_g5", n:"5. Intervalos en Máquina de Remo", d:"10 min (40s ritmo firme / 20s suave) · Empuja con piernas y espalda recta como tabla", usaKg:false}
+        {id:"s_g3", n:"3. Press de Pecho Sentado en Máquina (o en Banco Plano)", d:"12 reps · En el asiento con respaldo usando los agarres horizontales, o acostado en el banco plano con mancuernas", usaKg:true, defKg:"40"},
+        {id:"s_g4", n:"4. Remo a 1 Brazo en Polea (de frente) o con Mancuerna en Banco", d:"12 reps por lado · De frente a la polea ajustable o apoyando rodilla y mano en el banco plano", usaKg:true, defKg:"25"},
+        {id:"s_g5", n:"5. Intervalos en Bicicleta Spinning 🚴 (Quema-Triglicéridos)", d:"10 min (40s pedaleo firme / 20s suave) · En la bici SPINNER con manubrio alto y espalda recta", usaKg:false}
       ]
     },
     casa: {
-      nombre:"Sábado · Circuito Cuerpo Completo en Casa (16 kg)",
-      sub:"5 estaciones continuas quemadoras de glucosa con tus mancuernas de 16 kg.",
+      nombre:"Sábado · Circuito Cuerpo Completo en Casa (7-14 kg)",
+      sub:"5 estaciones continuas quemadoras de glucosa con tus mancuernas de 7 kg.",
       ejercicios:[
-        {id:"s_c1", n:"1. Sentadilla Sumo con Mancuerna de 16 kg", d:"15 reps · Compás abierto, baja vertical con espalda recta", usaKg:true, defKg:"16"},
-        {id:"s_c2", n:"2. Floor Press Neutro + Puente de Glúteo", d:"12 reps · Acostado, palmas enfrentadas empujando las 2 mancuernas de 16 kg", usaKg:true, defKg:"16"},
-        {id:"s_c3", n:"3. Step-up en escalón con Mancuernas", d:"10 reps por pierna · Sube firme empujando con el talón", usaKg:true, defKg:"16"},
-        {id:"s_c4", n:"4. Remo con apoyo en silla (16 kg)", d:"12 reps por brazo · Pausa de 2 seg arriba", usaKg:true, defKg:"16"},
+        {id:"s_c1", n:"1. Sentadilla Sumo con las 2 Mancuernas (14 kg)", d:"15-20 reps · Sostén ambas mancuernas de 7 kg al centro, compás abierto y espalda recta", usaKg:true, defKg:"14"},
+        {id:"s_c2", n:"2. Floor Press Neutro + Puente de Glúteo (7 kg c/u)", d:"15-18 reps · Acostado, palmas enfrentadas empujando las 2 mancuernas de 7 kg", usaKg:true, defKg:"7"},
+        {id:"s_c3", n:"3. Step-up en escalón con Mancuernas", d:"10 reps por pierna · Sube firme empujando con el talón", usaKg:true, defKg:"7"},
+        {id:"s_c4", n:"4. Remo con apoyo en silla (7-14 kg)", d:"12 reps por brazo · Pausa de 2 seg arriba", usaKg:true, defKg:"7"},
         {id:"s_c5", n:"5. Dead Bug (Escarabajo muerto)", d:"12 reps por lado · Espalda baja sellada contra el piso", usaKg:false}
       ]
     }
@@ -509,24 +509,24 @@ const PLAN = {
   domingo: {
     modoDefault: "gym",
     gym: {
-      nombre:"Domingo · Tracción, Brazos en Polea y Remo en Gimnasio",
+      nombre:"Domingo · Brazos en Polea, Hombro y Bicicleta en Gimnasio",
       sub:"Tensión continua en la Torre de Poleas y cierre cardiovascular.",
       ejercicios:[
         {id:"d_g1", n:"1. Curl de Bíceps en Torre de Polea Baja", d:"12-15 reps · Codos pegados al cuerpo", usaKg:true, defKg:"25"},
         {id:"d_g2", n:"2. Pushdown de Tríceps en Polea Alta", d:"12-15 reps · Extiende codos sin encorvar hombros", usaKg:true, defKg:"25"},
         {id:"d_g3", n:"3. Elevaciones Laterales en Polea Baja", d:"12 reps por brazo · Hombro medio sin cargar columna", usaKg:true, defKg:"10"},
         {id:"d_g4", n:"4. Puente de Glúteo + Pallof Press", d:"15 reps · Cadena posterior y abdomen anti-rotación", usaKg:true, defKg:"25"},
-        {id:"d_g5", n:"5. Cierre en Máquina de Remo", d:"10-12 min continuos · Empuje de piernas + espalda recta", usaKg:false}
+        {id:"d_g5", n:"5. Cierre en Bicicleta Spinning 🚴 (Oxidación de Grasas)", d:"10-12 min continuos · Ritmo constante en la bici SPINNER con espalda recta para bajar glucosa y triglicéridos", usaKg:false}
       ]
     },
     casa: {
-      nombre:"Domingo · Circuito Brazos, Postura y Core en Casa (16 kg)",
-      sub:"Circuito dinámico de cierre de semana con mancuernas de 16 kg.",
+      nombre:"Domingo · Circuito Brazos, Postura y Core en Casa (7-14 kg)",
+      sub:"Circuito dinámico de cierre de semana con mancuernas de 7 kg.",
       ejercicios:[
-        {id:"d_c1", n:"1. Puente de glúteos con 16 kg (pausa 3s)", d:"15 reps · Sostén 3 segundos arriba sin arquear lumbar", usaKg:true, defKg:"16"},
-        {id:"d_c2", n:"2. Curl Martillo con Mancuernas de 16 kg", d:"10-12 reps · Palmas enfrentadas, espalda junto a la pared", usaKg:true, defKg:"16"},
-        {id:"d_c3", n:"3. Extensión de Tríceps Copa Sentado (16 kg)", d:"12-15 reps · Sentado con respaldo, 1 mancuerna a dos manos", usaKg:true, defKg:"16"},
-        {id:"d_c4", n:"4. Paseo del Granjero Pesado (2 × 16 kg = 32 kg)", d:"50 seg · Camina erguido sosteniendo ambas mancuernas de 16 kg", usaKg:true, defKg:"16"},
+        {id:"d_c1", n:"1. Puente de glúteos con 7 kg (pausa 3s)", d:"15 reps · Sostén 3 segundos arriba sin arquear lumbar", usaKg:true, defKg:"7"},
+        {id:"d_c2", n:"2. Curl Martillo con Mancuernas de 7 kg", d:"10-12 reps · Palmas enfrentadas, espalda junto a la pared", usaKg:true, defKg:"7"},
+        {id:"d_c3", n:"3. Extensión de Tríceps Copa Sentado (7-14 kg)", d:"12-15 reps · Sentado con respaldo, 1 mancuerna a dos manos", usaKg:true, defKg:"7"},
+        {id:"d_c4", n:"4. Paseo del Granjero / Marcha con Mancuernas (2 × 7 kg)", d:"60 seg · Camina erguido sosteniendo ambas mancuernas de 7 kg (14 kg total), abdomen firme", usaKg:true, defKg:"14"},
         {id:"d_c5", n:"5. Plancha Lateral", d:"30 seg por lado · Estabilidad lumbar pura", usaKg:false}
       ]
     }
@@ -957,7 +957,7 @@ function pintarEjercicios(){
         '<div class="ej-meta">'+
           '<div class="kg-input-wrap">'+
             '<span>Carga:</span>'+
-            '<input type="number" inputmode="decimal" step="0.5" placeholder="16" value="'+(est.kg||"")+'" aria-label="Peso en kg para '+ej.n+'">'+
+            '<input type="number" inputmode="decimal" step="0.5" placeholder="7" value="'+(est.kg||"")+'" aria-label="Peso en kg para '+ej.n+'">'+
             '<span>kg</span>'+
           '</div>'+
           (prevKg ? '<span class="ult-peso">Ref: '+prevKg+' kg</span>' : '')+
@@ -1310,7 +1310,7 @@ function pintarProgreso(){
   ultimas.forEach(s=>{
     const fila = document.createElement("div");
     fila.className = "hist-item";
-    const mTag = s.modo === "gym" ? "🏢 Gym" : "🏠 Circuito 16kg";
+    const mTag = s.modo === "gym" ? "🏢 Gym" : "🏠 Circuito 7kg";
     const vTxt = s.vueltas ? " · " + s.vueltas + " vueltas" : "";
     fila.innerHTML =
       '<span>'+(ICONO_DIA[s.dia]||"🏋️")+' <strong>'+ETIQUETAS[s.dia]+' · '+mTag+'</strong> <span style="font-size:11.5px;color:var(--ink-soft)">(Mes '+(s.fase||1)+vTxt+')</span><br><span class="fecha-h">'+fmtFecha(s.fecha)+'</span></span>'+
