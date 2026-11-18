@@ -895,10 +895,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 700;
     color: var(--ink-muted);
     position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .cal-day:active {
+    transform: scale(0.92);
+  }
+  .cal-day .cal-sub {
+    font-size: 8.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 1px;
+    line-height: 1;
   }
   .cal-day.today {
     border: 2px solid var(--ink);
@@ -1360,19 +1374,31 @@
     </div>
 
     <div class="grid-2">
-      <!-- Visual 28-Day Consistency Calendar -->
+      <!-- Visual 28-Day Consistency Calendar (Interactive) -->
       <div class="card">
         <div class="card-header">
           <div>
             <h2>Mapa de actividad ( últimos 28 días )</h2>
-            <div class="sub" style="margin-bottom:0">Días entrenados en casa y en gimnasio</div>
+            <div class="sub" style="margin-bottom:0">Toca cualquier día para marcar o cambiar: <strong>Casa → Gym → Quitar</strong></div>
           </div>
         </div>
         <div class="cal-grid" id="activityCalendar"></div>
         <div class="cal-legend">
-          <span><i class="dot-leg" style="background:var(--lime);border:1px solid var(--ink)"></i> Casa (2×7kg)</span>
-          <span><i class="dot-leg" style="background:var(--purple)"></i> Gimnasio</span>
+          <span><i class="dot-leg" style="background:var(--lime);border:1px solid var(--ink)"></i> Casa (1 toque)</span>
+          <span><i class="dot-leg" style="background:var(--purple)"></i> Gym (2 toques)</span>
           <span><i class="dot-leg" style="border:2px solid var(--ink)"></i> Hoy</span>
+        </div>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);">
+          <div style="font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Registrar o editar otra fecha</div>
+          <div class="input-row" style="margin-top: 0; grid-template-columns: 1.15fr 1fr auto;">
+            <input class="inp-field" type="date" id="inpFechaManual" style="padding: 10px 12px; font-size: 13px;">
+            <select class="sel-field" id="selModoManual" style="padding: 10px 12px; font-size: 13px;">
+              <option value="casa">Casa (2×7 kg)</option>
+              <option value="gym">Gimnasio</option>
+              <option value="quitar">Quitar registro</option>
+            </select>
+            <button class="btn-main" id="btnGuardarFechaManual" style="width: auto; padding: 10px 14px; font-size: 13px;">Aplicar</button>
+          </div>
         </div>
       </div>
 
@@ -1865,7 +1891,38 @@ const PLAN = {
 };
 
 const ORDEN_DIAS = ["martes", "jueves", "sabado", "domingo"];
-const ETIQUETAS = { martes: "Mar", jueves: "Jue", sabado: "Sáb", domingo: "Dom" };
+const ETIQUETAS = { lunes: "Lun", martes: "Mar", miercoles: "Mié", jueves: "Jue", viernes: "Vie", sabado: "Sáb", domingo: "Dom" };
+function diaKeyDeFechaISO(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dow = new Date(y, m - 1, d).getDay();
+  const mapa = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+  return mapa[dow] || "martes";
+}
+function ordenarSesiones() {
+  estado.sesiones.sort((a, b) => (a.fecha || "").localeCompare(b.fecha || ""));
+}
+function establecerSesionEnFecha(iso, modo) {
+  // Elimina cualquier sesión previa en esa misma fecha
+  estado.sesiones = estado.sesiones.filter(s => s.fecha !== iso);
+  if (modo === "casa" || modo === "gym") {
+    const dKey = diaKeyDeFechaISO(iso);
+    const metaV = (FASES[estado.fase || 1] && FASES[estado.fase || 1].vueltas) || 3;
+    estado.sesiones.push({
+      fecha: iso,
+      dia: dKey,
+      modo: modo,
+      fase: estado.fase || 1,
+      vueltas: metaV,
+      hechos: 5,
+      total: 5,
+      manual: true,
+      ejercicios: {}
+    });
+  }
+  ordenarSesiones();
+  guardarDatos();
+  pintarProgreso();
+}
 
 const HABITOS_LISTA = [
   { id: "h_6am", t: "Horario matutino", s: "Transición gradual hacia las 6:00 AM", color: "purple" },
@@ -2797,7 +2854,7 @@ function pintarCalendario28Dias() {
   const cont = document.getElementById("activityCalendar");
   if (!cont) return;
   const diasSem = ["L", "M", "M", "J", "V", "S", "D"];
-  let html = diasSem.map(d => '<div class="cal-head">' + d + '</div>').join("");
+  cont.innerHTML = diasSem.map(d => '<div class="cal-head">' + d + '</div>').join("");
 
   const mapaSesiones = {};
   estado.sesiones.forEach(s => {
@@ -2816,13 +2873,26 @@ function pintarCalendario28Dias() {
     const iso = dt.getFullYear() + "-" + String(dt.getMonth() + 1).padStart(2, "0") + "-" + String(dt.getDate()).padStart(2, "0");
     const esHoy = dt.getTime() === hoy.getTime();
     const modoEntreno = mapaSesiones[iso];
+
+    const cell = document.createElement("div");
     let cls = "cal-day";
     if (esHoy) cls += " today";
     if (modoEntreno === "gym") cls += " trained-gym";
     else if (modoEntreno) cls += " trained-casa";
-    html += '<div class="' + cls + '" title="' + iso + '">' + dt.getDate() + '</div>';
+    cell.className = cls;
+    cell.title = fmtFecha(iso) + " · Toca para cambiar";
+
+    const subTag = modoEntreno === "gym" ? '<span class="cal-sub">Gym</span>' : modoEntreno === "casa" ? '<span class="cal-sub">Casa</span>' : '';
+    cell.innerHTML = '<span>' + dt.getDate() + '</span>' + subTag;
+
+    cell.onclick = () => {
+      // Ciclo: sin registro -> casa -> gym -> quitar
+      const siguienteModo = !modoEntreno ? "casa" : (modoEntreno === "casa" ? "gym" : "quitar");
+      establecerSesionEnFecha(iso, siguienteModo);
+    };
+
+    cont.appendChild(cell);
   }
-  cont.innerHTML = html;
 }
 
 function inicioSemana(d) {
@@ -2957,33 +3027,51 @@ function pintarHistorialPesos() {
   });
 }
 
+function borrarSesion(idx) {
+  estado.sesiones.splice(idx, 1);
+  guardarDatos();
+  pintarProgreso();
+}
+
 function pintarHistorialSesiones() {
   const cont = document.getElementById("histSesiones");
   if (!cont) return;
+  ordenarSesiones();
   const ses = estado.sesiones;
   if (ses.length === 0) {
     cont.innerHTML = '<div style="font-size:13px;color:var(--ink-muted);text-align:center;padding:12px;">Aún no hay sesiones registradas.</div>';
     return;
   }
   cont.innerHTML = "";
-  ses.slice(-10).reverse().forEach(s => {
+  ses.slice(-12).reverse().forEach((s, revIdx) => {
+    const realIdx = ses.length - 1 - revIdx;
     const row = document.createElement("div");
     row.className = "pill-row";
     row.style.cursor = "default";
     const mLabel = s.modo === "gym" ? "Gimnasio" : "Casa (2×7 kg)";
     const colorIco = s.modo === "gym" ? "purple" : "lime";
+    const etqDia = ETIQUETAS[s.dia] || ETIQUETAS[diaKeyDeFechaISO(s.fecha)] || "Día";
     row.innerHTML =
       '<div class="ico-circle ' + colorIco + '">' +
         '<svg class="ico ico-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
       '</div>' +
       '<div class="pill-row-body">' +
-        '<div class="pill-row-title">' + ETIQUETAS[s.dia] + ' · ' + mLabel + '</div>' +
+        '<div class="pill-row-title">' + etqDia + ' · ' + mLabel + '</div>' +
         '<span class="pill-row-sub">' + fmtFecha(s.fecha) + ' · Mes ' + (s.fase || 1) + (s.vueltas ? ' · ' + s.vueltas + ' vueltas' : '') + '</span>' +
       '</div>' +
-      '<span class="m-badge shared">' + s.hechos + '/' + s.total + '</span>';
+      '<span class="m-badge shared">' + s.hechos + '/' + s.total + '</span>' +
+      '<button class="ab-btn" style="color:#B91C1C;padding:4px 8px;">Borrar</button>';
+    row.querySelector("button").onclick = () => borrarSesion(realIdx);
     cont.appendChild(row);
   });
 }
+
+document.getElementById("btnGuardarFechaManual").onclick = () => {
+  const inpF = document.getElementById("inpFechaManual");
+  const selM = document.getElementById("selModoManual");
+  if (!inpF.value) { inpF.focus(); return; }
+  establecerSesionEnFecha(inpF.value, selM.value);
+};
 
 /* Export / Import / Force Update */
 document.getElementById("btnExportar").onclick = () => {
@@ -3128,6 +3216,8 @@ document.querySelectorAll(".bottom-dock .dock-btn").forEach(b => {
   document.getElementById("fechaHoy").textContent = d.toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "short" });
   cargarDatos();
   diaActivo = diaSugerido();
+  const inpFM = document.getElementById("inpFechaManual");
+  if (inpFM) inpFM.value = hoyISO();
   actualizarContadorReto();
   pintarSelectorFases();
   pintarSelectorDias();
